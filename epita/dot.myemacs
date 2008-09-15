@@ -1,0 +1,453 @@
+;; ==========
+;; load files
+;; ==========
+(setq load-path (nconc '( "~/.emacs.d/") load-path))
+(setq load-path (nconc '( "~/.emacs.d/tuareg") load-path))
+
+
+;;; =======
+;;; OPTIONS
+;;; =======
+(setq inhibit-startup-message t)	; don't show the GNU splash screen
+(setq frame-title-format "emacs: %b")		; titlebar shows buffer's name
+;(setq normal-erase-is-backspace-mode t)	; make delete work as it should
+(normal-erase-is-backspace-mode)
+(when (display-graphic-p)		; if graphic
+  (scroll-bar-mode nil)			; no scroll bar
+  (mouse-wheel-mode t)			; enable mouse wheel
+  )
+(menu-bar-mode nil)			; no menu bar
+(tool-bar-mode nil)			; no tool bar
+(setq scroll-step 1)			; smooth scrolling
+(setq visible-bell nil)
+(setq compilation-window-height 10)	; taille de la fenetre de compile mise a 15 ligne
+(setq compilation-scroll-output t)	; scroll auto de la fenetre de compile
+(blink-cursor-mode nil)			; curseur ne clignote plus
+(iswitchb-mode t)			; pour le switch de buffer, affiche les buffer possible
+(setq transient-mark-mode 't)		; highlight selection
+(setq line-number-mode 't)		; line number
+(setq column-number-mode 't)		; column number
+(fset 'yes-or-no-p 'y-or-n-p)		; 'y or n' instead of 'yes or no'
+(show-paren-mode t)			; Paren match highlighting
+(auto-compression-mode t)		;; Permet d'ouvrir les gz a la volee
+;;; Autre option a aprouver
+(setq-default gdb-many-windows t)	;; Better gdb
+(setq font-lock-maximum-decoration t)	; max decoration for all modes
+(setq default-major-mode 'text-mode)	; change default major mode to text
+(setq ring-bell-function 'ignore)	; turn the alarm totally off
+(setq make-backup-files nil)		; no backupfile
+(setq delete-auto-save-files t)         ; delete unnecessary autosave files
+(setq delete-old-versions t)            ; delete oldversion file
+(global-auto-revert-mode t)		; auto revert modified files
+(auto-image-file-mode)			; to see picture in emacs
+(pc-selection-mode)                     ; selection with shift
+;;; autre option non activer
+;(add-hook 'write-file-hooks 'delete-trailing-whitespace) ;; Delete trailing whitespaces on save
+;(setq user-full-name "Anthony PERARD")
+
+
+;;; ==========
+;;;  UNIQUIFY
+;;; ==========
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets)	;renomme les buffers pour des fichiers different qui porte le meme nom
+
+
+;;; ==========
+;;;  ENCODING
+;;; ==========
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
+
+;;; ========
+;;;  Ispell
+;;; ========
+(require 'ispell)
+(setq ispell-dictionary "francais")
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+
+
+;;; ==========================
+;;;  Open files/switch buffers
+;;; ==========================
+(when (string-match "^22." emacs-version)
+  (ido-mode t)
+  (ido-everywhere t)
+
+  ;; tab means tab, i.e. complete. Not "open this file", stupid.
+  (setq ido-confirm-unique-completion t)
+  ;; If the file doesn't exist, do try to invent one from a transplanar
+  ;; directory. I just want a new file.
+  (setq ido-auto-merge-work-directories-length -1)
+  ;; Don't switch to GDB-mode buffers
+  (setq ido-ignore-buffers (quote ("\\`\\*breakpoints of.*\\*\\'" "\\`\\*stack frames of.*\\*\\'" "\\`\\*gud\\*\\'" "\\`\\*locals of.*\\*\\'" "\\` ")))
+  )
+
+
+;;; ========
+;;; BINDINGS
+;;; ========
+;; BINDINGS :: misc
+(when (display-graphic-p)
+    (global-set-key [(control z)] 'undo)                ; undo only in graphic mode
+    (global-set-key [M-left] 'windmove-left)                ; move to left windnow
+    (global-set-key [M-right] 'windmove-right)              ; move to right window
+    (global-set-key [M-up] 'windmove-up)                    ; move to upper window
+    (global-set-key [M-down] 'windmove-down)
+  )
+(when (not (display-graphic-p))
+    (global-set-key [A-left] 'windmove-left)                ; move to left windnow
+    (global-set-key [A-right] 'windmove-right)              ; move to right window
+    (global-set-key [A-up] 'windmove-up)                    ; move to upper window
+    (global-set-key [A-down] 'windmove-down)
+  )
+(global-set-key [C-home] 'beginning-of-buffer)          ; go to the beginning of buffer
+(global-set-key [C-end] 'end-of-buffer)                 ; go to the end of buffer
+(global-set-key [(meta g)] 'goto-line)                  ; goto line #
+(global-set-key "\C-cg" 'goto-line)
+(global-set-key [(control tab)] 'other-window)          ; Ctrl-Tab = Next buffer
+(global-set-key [C-S-iso-lefttab]
+                '(lambda () (interactive)
+                   (other-window -1)))                  ; Ctrl-Shift-Tab = Previous buffer
+(global-set-key [f12] 'replace-string)
+;; BINDINGS :: compile
+(global-set-key [f5] 'gdb)
+(global-set-key [f7] 'previous-error)
+(global-set-key [f8] 'next-error)
+(global-set-key [f10] 'recompile)
+(global-set-key [f11] 'compile)
+;; ;; BINDINGS :: font size
+;; (global-set-key [(control +)] 'inc-font-size)
+;; (global-set-key [(control =)] 'reset-font-size)
+;; BINDINGS :: ido
+(global-set-key [(control b)] 'ido-switch-buffer)
+
+; Pour afficher la page de man d'une fonction
+(global-set-key [f1] (lambda() (interactive)(manual-entry (current-word))))
+
+
+;; ========
+;; doxymacs
+;; ========
+(require 'doxymacs)
+;; Invoke doxymacs-mode with M-x doxymacs-mode. To have doxymacs-mode
+;; invoked  automatically when in C/C++ mode
+(add-hook 'c-mode-common-hook 'doxymacs-mode)
+;; uncomment this line if you want the comment for the C++-style;
+(setq doxymacs-doxygen-style "C++")
+;; comment with the C mode style
+(setq doxymacs-doxygen-style "JavaDoc")
+;; If you want Doxygen keywords fontified use M-x doxymacs-font-lock.
+(defun my-doxymacs-font-lock-hook ()
+  (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
+      (doxymacs-font-lock)))
+(add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
+
+
+
+;;; =======
+;;; C HOOKS
+;;; =======
+;; add header guard
+(defun insert-header-guard ()
+  (interactive)
+  (save-excursion
+    (when (buffer-file-name)
+      (let*
+          (
+           (name (file-name-nondirectory buffer-file-name))
+           (macro (replace-regexp-in-string "\\." "_" (upcase name)))
+           (macro (replace-regexp-in-string "-" "_" macro))
+           (macro (concat macro "_"))
+           )
+        (goto-char (point-min))
+        (insert "#ifndef " macro "\n")
+        (insert "# define " macro "\n\n")
+        (goto-char (point-max))
+        (insert "\n#endif /* !" macro " */\n")
+        )
+      )
+    )
+  )
+; Auto insert C/C++ header guard
+(add-hook 'find-file-hooks
+          (lambda ()
+            (when (and (memq major-mode '(c-mode c++-mode)) (equal (point-min) (point-max)) (string-match ".*\\.hh?" (buffer-file-name)))
+              (insert-header-guard)
+              (goto-line 3)
+              (insert "\n"))))
+
+(require 'cc-mode)
+(setq c-style-alist
+      (append
+       (list nil
+	     '("epita"
+	       (c-basic-offset . 2)
+	       (c-comment-only-line-offset . 0)
+	       (c-hanging-braces-alist     . ((substatement-open before
+								 after)))
+	       (c-offsets-alist . ((topmost-intro        . 0)
+				   (substatement         . +)
+				   (substatement-open    . 0)
+				   (case-label           . +)
+				   (access-label         . -)
+				   (inclass              . +)
+				   (inline-open          . 0)
+				   ))))
+       c-style-alist))
+(setq c-default-style "epita")
+
+(setq c-mode-hook
+      '(lambda ()
+	 (local-set-key "\C-cc" 'uncomment-region) ; C-c C-c pour commenter une region
+					;suprime les espace en fin de ligne lors de l'ecriture
+	 (add-hook 'write-file-hooks 'delete-trailing-whitespace)
+	 ))
+
+(setq c++-mode-hook
+      '(lambda ()
+	 (local-set-key "\C-cc" 'uncomment-region) ; C-c C-c pour commenter une region
+					;suprime les espace en fin de ligne lors de l'ecriture
+	 (add-hook 'write-file-hooks 'delete-trailing-whitespace)
+	 ))
+
+;; Count nb lines
+(defun rec-lines (count)
+  (forward-line count)
+  (when (not (= (char-after) (if (= count 1) ?} ?{)))
+    (rec-lines count)
+    )
+  (point)
+  )
+(defun lines ()
+  "Count number of lines of a C function"
+  (interactive)
+  (let ((old-pt (point))
+        (pt1 (rec-lines 1))
+        (pt2 (rec-lines -1)))
+    (goto-char old-pt)
+    (message (format "Lines : %d" (1-
+				   (count-lines pt1 pt2)
+				   )))
+;;     (message (format "Match line : %d" (count-matches "^$")))
+    )
+  )
+(global-set-key "\C-x\C-l" 'lines)
+
+
+;; Different insertion
+(defun c-insert-fixme (&optional msg)
+  (interactive "sFixme: ")
+  (save-excursion
+    (end-of-line)
+    (when (not (looking-back "^\s*"))
+      (insert " "))
+    (insert "// FIXME")
+    (when (not (string-equal msg ""))
+      (insert ": " msg))))
+
+(defun c-insert-debug (&optional msg)
+  (interactive)
+  (when (not (looking-at "\W*$"))
+    (beginning-of-line)
+    (insert "\n")
+    (line-move -1))
+  (c-indent-line)
+  (insert "std::cerr << \"\" << std::endl;")
+  (backward-char 15))
+
+(defun c-insert-block (&optional r b a)
+  (interactive "P")
+  (unless b (setq b ""))
+  (unless a (setq a ""))
+  (if r
+      (progn
+        (save-excursion
+          (goto-char (rbegin))
+          (beginning-of-line)
+          (insert "\n")
+          (line-move -1)
+          (insert b "{")
+          (c-indent-line))
+        (save-excursion
+          (goto-char (- (rend) 1))
+          (end-of-line)
+          (insert "\n}" a)
+          (c-indent-line)
+          (line-move -1)
+          (end-of-line))
+        (indent-region (rbegin) (rend)))
+    (progn
+        (beginning-of-line)
+
+        (setq begin (point))
+
+        (insert b "{\n")
+        (end-of-line)
+        (insert "\n}" a)
+
+        (indent-region begin (point))
+
+        (line-move -1)
+        (end-of-line))))
+
+(defun c-insert-braces (&optional r)
+  (interactive "P")
+  (c-insert-block r))
+
+(defun c-insert-ns (name r)
+  (interactive "sName: \nP")
+  (c-insert-block r (concat "namespace " name "\n")))
+
+(defun c-insert-switch (value r)
+  (interactive "sValue: \nP")
+  (c-insert-block r (concat "switch (" value ")\n")))
+
+(defun c-insert-if (c r)
+  (interactive "sCondition: \nP")
+  (c-insert-block r (concat "if (" c ")\n")))
+
+(defun c-insert-class (name)
+  (interactive "sName: ")
+  (c-insert-block () (concat "class " name "\n") ";")
+  (insert "public:")
+  (c-indent-line)
+  (insert "\n")
+  (c-indent-line))
+
+
+;;; =======
+;;; SHELL
+;;; =======
+(defun insert-shell-shebang ()
+  (interactive)
+  (when (buffer-file-name)
+    (goto-char (point-min))
+    (insert "#!/bin/sh\n\n"))
+)
+
+
+;;; ================
+;;; File extensions
+;;; =================
+(add-to-list 'auto-mode-alist '("\\.l$" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.y$" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.ll$" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.yy$" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.xcc$" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.xhh$" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.pro$" . sh-mode)) ; Qt .pro files
+(add-to-list 'auto-mode-alist '("configure$" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Drakefile$" . ruby-mode))
+
+
+
+;;; =====
+;;; Font
+;;; =====
+(setq default-font-size 120)
+
+(defun set-font-size (&optional size)
+  "Set the font size to SIZE (default: default-font-size)."
+  (interactive "nSize: ")
+  (unless size
+    (setq size default-font-size))
+  (set-face-attribute 'default nil :height size))
+(defun reset-font-size ()
+  (interactive)
+  (set-font-size))
+(defun find-next (c l)
+    (if (< c (car l))
+        (car l)
+      (if (cdr l)
+          (find-next c (cdr l))
+        (car l))))
+(defun inc-font-size ()
+  (interactive)
+  (let ((sizes '(60 75 90 105 120 135 170 280))
+        (current (face-attribute 'default :height)))
+    (let ((new (find-next current sizes)))
+      (set-font-size new)
+      (message (int-to-string new)))))
+(set-font-size)
+
+
+;; ======
+;; Tuareg
+;; ======
+(setq auto-mode-alist (cons '("\\.ml\\w?" . tuareg-mode) auto-mode-alist))
+(autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
+(autoload 'camldebug "camldebug" "Run the Caml debugger" t)
+
+(if (and (boundp 'window-system) window-system)
+    (when (string-match "XEmacs" emacs-version)
+       	(if (not (and (boundp 'mule-x-win-initted) mule-x-win-initted))
+            (require 'sym-lock))
+       	(require 'font-lock)))
+
+
+;; =====
+;; Autre
+;; =====
+
+; '-*- mode -*-' en commentaire en debut de fichier, permet a emacs de faire la
+; coloration dans le mode mode
+
+; ansi-term, en remplacement de term  (bloque emacs)
+; shell peut aussi etre utiliser
+
+; Cx-` : next-error
+; M-= : affiche nb ligne et caractere
+; M-/ : auto completion
+; M-y : pour faire defiler les different copier fait avant, apres un C-y
+
+
+;; de la conf de mefyl
+
+;; (defun count-word (start end)
+;;   (let ((begin (min start end))(end (max start end)))
+;;     (save-excursion
+;;       (goto-char begin)
+;;       (re-search-forward "\\W*") ; skip blank
+;;       (setq i 0)
+;;       (while (< (point) end)
+;;         (re-search-forward "\\w+")
+;;         (when (<= (point) end)
+;;           (setq i (+ 1 i)))
+;;         (re-search-forward "\\W*"))))
+;;   i)
+
+;; (defun stat-region (start end)
+;;   (interactive "r")
+;;   (let
+;;       ((words (count-word start end)) (lines (count-lines start end)))
+;;     (message
+;;      (concat "Lines: "
+;;              (int-to-string lines)
+;;              "  Words: "
+;;              (int-to-string words)))
+;;     )
+;;   )
+
+;; load mode for corewar
+(if (file-exists-p "~/.emacs.d/f6100-mode.el")
+    (load-file "~/.emacs.d/f6100-mode.el"))
+(add-to-list 'auto-mode-alist '("\\.s$" . f6100-mode))
+
+;; Tiger syntactic coloration
+(load "~/.emacs.d/tiger.el")
+(add-to-list 'auto-mode-alist' ("\\.ti[gh]$" . tiger-mode))
+
+;; ruby
+(load "~/.emacs.d/ruby-mode.el")
+
+(add-to-list 'ruby-mode-hook
+      '(lambda ()
+	 (local-set-key "\C-cc" 'uncomment-region)
+	 (add-hook 'write-file-hooks 'delete-trailing-whitespace)
+	 ))

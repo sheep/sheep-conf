@@ -1,0 +1,58 @@
+/*
+** bocal 2007
+** version 2007020401
+*/
+
+/* emacs */
+#if X_RESOLUTION > 4000
+emacs.font:			9x15bold
+#else
+emacs.font:			7x13bold
+#endif
+emacs.ReverseVideo:		on
+
+/* dclock */
+DClock*geometry:                -0+0
+DClock*width:                   185
+DClock*height:                  50
+DClock*foreground:              white
+DClock*background:              black
+DClock*reverseVideo:            False
+DClock*miltime:                 True
+DClock*militaryTime:            True
+DClock*scroll:                  True
+DClock*seconds:                 False
+DClock*date:                    %W %d %M
+DClock*bell:                    False
+
+/* xterm */
+xterm*saveLines:                1000
+xterm*AllowIconInput:		on
+xterm*Background:		black
+xterm*BodyFont:			9x15
+xterm*Border:			gray
+xterm*DeiconifyWarp:		off
+xterm*Font:			9x15bold
+xterm*Foreground:		white
+xterm*InternalBorder:		1
+xterm*MarginBell:		off
+xterm*MenuFont:			timrom12
+xterm*Mouse:			yellow
+xterm*TitleFont:		vtbold
+xterm*charClass:		33:48,37:48,45-47:48,64:48
+xterm*colorAttrMode:		true
+xterm*colorMode:		true
+xterm*curses:			on
+xterm*cutNewline:		off
+xterm*jumpScroll:		on
+xterm*multiClickTime:		500
+xterm*multiScroll:		on
+xterm*reverseVideo:		on
+xterm*reverseWrap:		off
+xterm*scrollBar:		off
+xterm*scrollbar*thickness:      5
+
+/* Xm */
+Xm.geometry:                    400x200+0-0
+Xm*foreground:                  white
+Xm*background:                  black

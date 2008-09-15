@@ -1,0 +1,59 @@
+[ "$HOSTNAME" = "gate-ssh" ] && return
+[ -z "$PS1" ] && return
+
+####################
+# Temp export PATH #
+####################
+
+# User's binaries
+#export PATH=$HOME/sbin:$HOME/bin
+# School's (Bocal) binaries
+#export PATH=$PATH:/usr/site/sbin:/usr/site/bin
+# Netsoul's (Bocal) binaries
+#export PATH=$PATH:/usr/netsoul/bin
+# Other bocal binaries
+#export PATH=$PATH:/usr/heimdal/sbin:/usr/heimdal/bin
+#export PATH=$PATH:/usr/arla/sbin:/usr/arla/bin
+# Package's binaries
+#export PATH=$PATH:/usr/local/sbin:/usr/local/bin
+# System's binaries
+#export PATH=$PATH:/usr/sbin:/usr/bin:/sbin:/bin
+
+
+#########
+# Alias #
+#########
+
+unalias emacs
+unalias ne
+
+if which -s gls && test `uname -s` = "NetBSD"  -o  `uname -s` = "FreeBSD" ; then
+    alias ls='gls --color -F'
+else
+    alias ls='ls -F'
+fi
+alias l=ls
+alias ll='ls -lh'
+alias la='ls -A'
+alias lla='ls -lha'
+alias zlock="zlock -immed"
+alias z="zlock -immed"
+alias j='jobs'
+alias ..='cd ..'
+
+alias ns='~/script/ns_who.sh'
+
+#alias gdb='/usr/pkg/bin/gdb'
+#alias s='slrn'
+#alias e='emacs -nw'
+
+
+########
+# Misc #
+########
+
+umask 77
+
+#bindkey "\e[3~" delete-char
+#export MALLOC_OPTIONS=J
+#export PS1="$USER@$HOST $ "
