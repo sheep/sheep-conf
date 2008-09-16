@@ -1,0 +1,10 @@
+/* xterm */
+xterm*font:                     7x13
+xterm*background:               black
+xterm*foreground:               white
+xterm*scrollBar:                false
+xterm*saveLines:                2000
+
+/* emacs */
+Emacs*font:                     7x13bold
+Emacs*ReverseVideo:             on
