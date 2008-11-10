@@ -1,0 +1,36 @@
+#! /bin/zsh
+#
+# Alias
+#
+# FIXME:
+# Check for gls or ls (linux, freebee)
+
+LSOPTS="--tabsize=0 --literal --color=auto --show-control-chars --human-readable -F"
+
+alias ls="ls $LSOPTS"
+alias l=ls
+alias ll="ls -lh"
+alias la="ls -A"
+alias lla="ls -lah"
+
+alias -- -="cd -"
+
+alias cp="cp -i"
+alias mv="mv -i"
+
+alias df="df -h"
+alias du="du -h"
+
+alias j=jobs
+alias e="emacs 2> /dev/null"
+alias screen="screen -aRAd"
+alias diff='diff -u'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias z="zlock -immed"
+alias s='slrn'
+alias gnus='emacs -f gnus'
+
+alias -g L='|less'
+
+alias m=make
