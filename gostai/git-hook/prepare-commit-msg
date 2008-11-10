@@ -1,0 +1,78 @@
+#! /bin/sh
+
+# Use this as prepare-commit-msg hook to automatically generate
+# changelog-like entry template for your modifications. This hook is
+# only supported by git >= 1.5.5.
+
+file="$1"
+type="$2"
+
+for i in gsed gnused sed
+do
+  if $i --version > /dev/null 2>&1; then
+    sed=$i
+    break
+  fi
+done
+
+if test x"$sed" = x; then
+  echo >&2 "$0: GNU Sed is required and was not found"
+  exit 52
+fi
+
+if $sed '/^diff --git/{g;q;}' "$file" |
+    grep -v '^#' |
+    grep -v '^$' |
+    grep -v '^Signed-off-by:'; then
+    # The commit message is already filled (commit --amend, for instance)
+    exit 0
+fi
+
+format ()
+{
+    $sed '
+# Keep only the revelant part
+1,/Changes to be committed/d
+1,/#$/d
+/#$/Q
+# Put the filename in the hold space and the transformation type
+# in the pattern space
+h
+s/^#[^:]*:\s*//
+x
+s/^#\s*\([^:]*\):.*$/\1/
+# Pretty print transformations
+s/new file/: New./
+s/deleted/: Remove./
+s/renamed/: Rename./
+s/modified/: ./
+# Pretty print filename
+/: Rename./{
+  g
+  s/.*-> /\n\t* /
+  s/^/: Rename as.../
+  s/$/: this./
+  x
+  s/ ->.*//
+  x
+};
+# Join the result to form the final line
+H
+g
+s/\n//
+s/.*/\t* \0/
+'
+}
+put ()
+{
+    echo "$@" >> "$file"
+}
+
+tmp=$(mktemp "git-prepare-commit-hook.XXXXXX")
+mv "$file" "$tmp"
+
+put "."
+put
+git status | format >> "$file"
+cat "$tmp" >> "$file"
+rm "$tmp"
