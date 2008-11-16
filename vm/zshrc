@@ -1,0 +1,24 @@
+#!/bin/zsh
+
+export PS1="(\u@\h \#)"
+export SHELL="/bin/zsh"
+export TERM="xterm"
+export PAGER="less"
+export EDITOR="emacs"
+#export MAIL="/u/all/$USER/mail/$USER"
+export WATCH="all"
+export HISTSIZE=5000
+export SAVEHIST=5000
+export PATH="$HOME/sbin:$HOME/bin:$PATH"
+
+alias l="ls -l"
+alias ll="ls -l"
+alias la="ls -la"
+#alias emacs="emacs -nw"
+alias ne="emacs"
+
+# Load your's.
+if [ -f $HOME/.myzshrc ]
+then
+    source $HOME/.myzshrc
+fi
