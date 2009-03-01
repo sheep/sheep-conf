@@ -1,13 +1,20 @@
-#! /bin/zsh
-#
-# Alias
-#
-# FIXME:
-# Check for gls or ls (linux, freebee)
+#! /usr/bin/zsh
+##
+## -*- zsh -*-
+##
+## zsh_alias for zsh in ~/.myconf/zsh_alias
+##
+## File for alias
 
 LSOPTS="--tabsize=0 --literal --color=auto --show-control-chars --human-readable -F"
+if [ `uname -s` = "NetBSD"  -o  `uname -s` = "FreeBSD" ] && which gls; then
+    alias ls="gls $LSOPTS"
+elif [ `uname -s` = "Linux" ]; then
+    alias ls="ls $LSOPTS"
+else
+    alias ls="ls -F"
+fi
 
-alias ls="ls $LSOPTS"
 alias l=ls
 alias ll="ls -lh"
 alias la="ls -A"
@@ -21,16 +28,30 @@ alias mv="mv -i"
 alias df="df -h"
 alias du="du -h"
 
-alias j=jobs
 alias e="emacs 2> /dev/null"
 alias screen="screen -aRAd"
 alias diff='diff -u'
+# FIXME: Use egrep, if exist.
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
-alias z="zlock -immed"
-alias s='slrn'
 alias gnus='emacs -f gnus'
 
-alias -g L='|less'
+# Zlock for use on PIE.
+which zlock >/dev/null && alias z="zlock -immed"
+
+if [ "$(uname -s)" != "Linux" ]; then
+    alias make='gmake --no-print-directory'
+fi
 
 alias m=make
+alias man='PAGER=most man'
+which svn-wrapper.sh >/dev/null && alias svn='svn-wrapper.sh'
+
+alias ssh-agent='ssh-agent -t 2700'
+
+# alias to some script.
+alias ns='~/script/ns_who.sh'
+alias sn=ns
+
+# global alias
+alias -g L='|less'
