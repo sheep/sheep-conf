@@ -62,7 +62,7 @@ export NO_STRICT_EPITA_HEADERS='1' # Used for ViM
 # tsocks
 export TSOCKS_PASSWORD=$(cat ~/.socks)
 
-export MAKE=gmake
+export MAKE=make
 
 # config.site
 #export CONFIG_SITE="$HOME/config.site"
@@ -227,7 +227,6 @@ bindkey '\e[F'	end-of-line		# end
 #bindkey '\e[4~'	end-of-line		# end
 bindkey "\eOP"	run-help		# run-help when F1 is pressed
 bindkey "^[[A"	up-line-or-search	# cursor up
-bindkey -s '^P'	"| less\n"		# ctrl-P pipes to less
 #bindkey -s '^B'	" &\n"			# ctrl-B runs it in the background
 #bindkey ' '	magic-space		# also do history expansion on space
 bindkey "\e[3~" delete-char
