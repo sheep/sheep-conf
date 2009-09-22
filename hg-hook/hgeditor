@@ -17,7 +17,6 @@ case "${EDITOR}" in
         ;;
 esac
 
-
 HGTMP=""
 cleanup_exit() {
     rm -rf "$HGTMP"
@@ -56,6 +55,7 @@ format ()
 s/^M \(.*\)$/\t* \1: ./
 s/^A \(.*\)$/\t* \1: New./
 s/^R \(.*\)$/\t* \1: Remove./
+/^!/ d
 '
 }
 
