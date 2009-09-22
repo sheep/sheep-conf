@@ -44,32 +44,32 @@ end
 --
 
 -- Tiling with single 1:1 horizontal split
-local tmp=mktiling(mksplit("horizontal", a_frame, a_frame))
-ioncore.deflayout("hsplit", tmp)
-ioncore.deflayout("default", tmp)
+--local tmp=mktiling(mksplit("horizontal", a_frame, a_frame))
+--ioncore.deflayout("hsplit", tmp)
+--ioncore.deflayout("default", tmp)
 
 -- Tiling with single 1:1 vertical split
-ioncore.deflayout("vsplit",
-    mktiling(mksplit("vertical", a_frame, a_frame))
-)
+--ioncore.deflayout("vsplit",
+--    mktiling(mksplit("vertical", a_frame, a_frame))
+--)
 
 -- Tiling with single 1:1 floating horizontal split
-ioncore.deflayout("hfloat", 
-    mktiling(mksplit("horizontal", a_frame, a_frame, true))
-)
+--oncore.deflayout("hfloat",
+--	mktiling(mksplit("horizontal", a_frame, a_frame, true))
+--)
 
 -- Tiling with single 1:1 floating vertical split
-ioncore.deflayout("vfloat", 
-    mktiling(mksplit("vertical", a_frame, a_frame, true))
-)
-
+--ioncore.deflayout("vfloat",
+--    mktiling(mksplit("vertical", a_frame, a_frame, true))
+--)
+--
 -- Tiling with horizontal and then vertical splits
-ioncore.deflayout("2x2",
-    mktiling(mksplit("horizontal", 
-                     mksplit("vertical", a_frame, a_frame),
-                     mksplit("vertical", a_frame, a_frame))
-    )
-)
+--ioncore.deflayout("2x2",
+--    mktiling(mksplit("horizontal",
+--                     mksplit("vertical", a_frame, a_frame),
+--                     mksplit("vertical", a_frame, a_frame))
+--    )
+--)
 
 -- Tiling with single full screen frame
 ioncore.deflayout("full", mktiling(a_frame))

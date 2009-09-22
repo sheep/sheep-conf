@@ -149,8 +149,8 @@ defbindings("WMPlex.toplevel", {
     bdoc("Query for manual page to be displayed."),
     kpress(ALTMETA.."F1", "mod_query.query_man(_, ':man')"),
 
-    bdoc("Show the Ion manual page."),
-    kpress(META.."F1", "ioncore.exec_on(_, ':man ion3')"),
+    -- bdoc("Show the Ion manual page."),
+    -- kpress(META.."F1", "ioncore.exec_on(_, ':man ion3')"),
 
     bdoc("Run a terminal emulator."),
     kpress(ALTMETA.."F2", "ioncore.exec_on(_, XTERM or 'xterm')"),
@@ -164,9 +164,9 @@ defbindings("WMPlex.toplevel", {
     bdoc("Query for host to connect to with SSH."),
     kpress(ALTMETA.."F4", "mod_query.query_ssh(_, ':ssh')"),
 
-    bdoc("zlock"),
-    kpress(ALTMETA.."F5", 
-           "ioncore.exec_on(_, 'zlock -immed')"),
+    bdoc("xlock"),
+    kpress(META.."F1",
+           "ioncore.exec_on(_, 'xscreensaver-command -lock')"),
 
     bdoc("run firefox"),
     kpress(META.."F5", 
@@ -189,6 +189,9 @@ defbindings("WMPlex.toplevel", {
     bdoc("Display context menu."),
     --kpress(META.."M", "mod_menu.menu(_, _sub, 'ctxmenu')"),
     kpress(META.."M", "mod_query.query_menu(_, _sub, 'ctxmenu', 'Context menu:')"),
+
+    bdoc("Quit ion3."),
+    kpress(META.."Escape", "ioncore.shutdown(_)"),
 })
 
 
