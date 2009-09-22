@@ -194,7 +194,7 @@ show-man ()
 
 my-accept-line ()
 {
-    targets="emacs e firefox xpdf gthumb eclipse"
+    targets="emacs e firefox xpdf gthumb eclipse gnus"
 
     if test "${+SSH_CONNECTION}" -eq 0; then
         if ! echo "$BUFFER" | grep -Eq "&!?$"; then
