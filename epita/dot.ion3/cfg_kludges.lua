@@ -22,8 +22,8 @@ defwinprop{
 defwinprop{
     is_dockapp = true,
     statusbar = "systray",
-    max_size = { w = 64, h = 64},
-    min_size = { w = 64, h = 64},
+    --max_size = { w = 64, h = 64},
+    --min_size = { w = 64, h = 64},
 }
 
 
