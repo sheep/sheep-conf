@@ -43,6 +43,31 @@ defwinprop{
 --]]
 
 
+-- Associate an application to a frame.
+
+defwinprop {
+  class = "Xm",
+  instance = "ns_xm",
+  target = "*scratchpad*",
+}
+
+defwinprop {
+  class = "Soulmebaby",
+  instance = "soulmebaby",
+  target = "chatsframe",
+}
+
+defwinprop {
+  class = "Pidgin",
+  instance = "pidgin",
+  target = "chatsframe",
+}
+
+defwinprop {
+  class = "Iceweasel",
+  instance = "Navigator",
+  target = "firefoxframe",
+}
 
 -- Define some additional title shortening rules to use when the full
 -- title doesn't fit in the available space. The first-defined matching 
