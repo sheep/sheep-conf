@@ -19,6 +19,7 @@ set ignorecase		" Do case insensitive matching
 "set hidden             " Hide buffers when they are abandoned
 "set mouse=a		" Enable mouse usage (all modes) in terminals
 
+" Indent Part
 
 set tabstop=8        " Force tabs to be displayed/expanded to 4 spaces (instead of default 8).
 set softtabstop=2    " Make Vim treat <Tab> key as 4 spaces, but respect hard Tabs.
@@ -30,6 +31,11 @@ set expandtab        " Turn Tab keypresses into spaces.  Sounds like this is hap
                      "   on lines 1_to_end-of-file.
 set shiftwidth=2     " When auto-indenting, indent by this much.
                      "   (Use spaces/tabs per "expandtab".)
+filetype indent on
+
+
+" Other part
+
 "help tabstop         " Find out more about this stuff.
 "help vimrc           " Find out more about .vimrc/_vimrc :-)
 
