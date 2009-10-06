@@ -61,7 +61,7 @@ export NO_STRICT_EPITA_HEADERS='1' # Used for ViM
 #export SOCKS5_SERVER='socks-2.epita.fr'
 
 # tsocks
-export TSOCKS_PASSWORD=$(cat ~/.socks)
+test -f ~/.socks && export TSOCKS_PASSWORD=$(cat ~/.socks)
 
 export MAKE=make
 
