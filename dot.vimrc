@@ -32,3 +32,8 @@ set shiftwidth=2     " When auto-indenting, indent by this much.
                      "   (Use spaces/tabs per "expandtab".)
 "help tabstop         " Find out more about this stuff.
 "help vimrc           " Find out more about .vimrc/_vimrc :-)
+
+
+set scrolloff=2     " to have always 2 line before/after the cursor
+                    " in top/bottom of the screen
+set wildmode=longest,list " to have a bash style autocompletion
