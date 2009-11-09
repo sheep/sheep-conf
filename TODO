@@ -1,1 +1,4 @@
 I have to do my conf.
+
+Replace ${HOME} in .gitconfig by $HOME.
+Add .gitignore in repos.
