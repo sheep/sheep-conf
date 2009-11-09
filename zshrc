@@ -47,8 +47,9 @@ export PAGER=less
 
 export NAME='Anthony PERARD'
 export FULLNAME='Anthony PERARD'
-export EMAIL='perard_a@yaka.epita.fr'
-export REPLYTO='perard_a@yaka.epita.fr'
+export EMAIL='anthony.perard@gmail.com'
+export REPLYTO='anthony.perard@gmail.com'
+export SHELL='zsh'
 
 export EDITOR='vim'
 export HGEDITOR='~/.myconf/hgeditor'
