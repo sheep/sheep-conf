@@ -29,7 +29,7 @@ alias df="df -h"
 alias du="du -h"
 
 alias e="emacs 2> /dev/null"
-alias screen="screen -aRAd"
+alias screen="screen -aRAdU"
 alias diff='diff -u'
 # FIXME: Use egrep, if exist.
 alias grep='grep --color=auto'
