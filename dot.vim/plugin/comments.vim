@@ -161,6 +161,9 @@ function! CommentLine()
   " for VHDL and Haskell files use -- 
   elseif file_name =~ '\.vhd$' || file_name =~ '\.vhdl$' || file_name =~ '\.hs$'
     execute ":silent! normal ^gI-- \<ESC>\<down>^"
+  " for Ada files use --
+  elseif file_name =~ '\.adb$' || file_name =~ '\.gpr$'
+    execute ":silent! normal ^gI-- \<ESC>\<down>^"
   " for all other files use # 
   else
     execute ":silent! normal ^i#\<ESC>\<down>^"
@@ -205,6 +208,9 @@ function! UnCommentLine()
     execute ":silent! normal :nohlsearch\<CR>:s/!//\<CR>:nohlsearch\<CR>"
   " for VHDL and Haskell files use --
   elseif file_name =~ '\.vhd$' || file_name =~ '\.vhdl$' || file_name =~ '\.hs$'
+    execute ":silent! normal :nohlsearch\<CR>:s/-- //\<CR>:nohlsearch\<CR>"
+  " for Ada files use --
+  elseif file_name =~ '\.adb$' || file_name =~ '\.gpr$'
     execute ":silent! normal :nohlsearch\<CR>:s/-- //\<CR>:nohlsearch\<CR>"
   " for all other files use # 
   else
@@ -271,6 +277,9 @@ function! RangeCommentLine()
   " for VHDL and Haskell files use --
   elseif file_name =~ '\.vhd$' || file_name =~ '\.vhdl$' || file_name =~ '\.hs$'
     execute ":silent! normal ^gI-- \<ESC>\<down>^"
+  " for Ada files use --
+  elseif file_name =~ '\.adb$' || file_name =~ '\.gpr$'
+    execute ":silent! normal ^gI-- \<ESC>\<down>^"
   " for all other files use #  
   else
     execute ":silent! normal :s/\\S/\\#\\0/\<CR>:nohlsearch<CR>"
@@ -314,6 +323,9 @@ function! RangeUnCommentLine()
     execute ":silent! normal :s/!//\<CR>:nohlsearch\<CR>"
   " for VHDL and Haskell files use --
   elseif file_name =~ '\.vhd$' || file_name =~ '\.vhdl$' || file_name =~ '\.hs$'
+    execute ":silent! normal :s/-- //\<CR>:nohlsearch\<CR>"
+  " for Ada files use --
+  elseif file_name =~ '\.adb$' || file_name =~ '\.gpr$'
     execute ":silent! normal :s/-- //\<CR>:nohlsearch\<CR>"
   " for all other files use # 
   else
