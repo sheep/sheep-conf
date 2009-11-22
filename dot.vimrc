@@ -1,6 +1,8 @@
 set nocompatible
 "set columns
-syntax on
+if has("syntax")
+  syntax on
+endif
 
 " Uncomment the following to have Vim load indentation rules and plugins
 " according to the detected filetype.
