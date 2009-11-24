@@ -9,7 +9,7 @@ mod_statusbar.create{
     screen=0,
     pos='bl',
     -- Set this to true if you want a full-width statusbar
-    fullsize=false,
+    fullsize=true,
     -- Swallow systray windows
     systray=true,
 
