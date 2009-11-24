@@ -11,6 +11,7 @@
 -- or Mod4; see the output of 'xmodmap'.
 META="Mod4+"
 --ALTMETA=""
+ALT="Mod1+"
 
 -- Terminal emulator
 XTERM="xterm"

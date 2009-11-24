@@ -191,7 +191,7 @@ defbindings("WMPlex.toplevel", {
     kpress(META.."M", "mod_query.query_menu(_, _sub, 'ctxmenu', 'Context menu:')"),
 
     bdoc("Quit ion3."),
-    kpress(META.."Escape", "ioncore.shutdown(_)"),
+    kpress(ALT..META.."Escape", "ioncore.shutdown(_)"),
 })
 
 
