@@ -45,7 +45,6 @@ set shiftwidth=2     " When auto-indenting, indent by this much.
 set directory=~/.vim/tmp " directory to place swap files in
 set title		" set the title of the windows to the current file name
 set autoindent		" always set autoindenting on
-filetype indent on
 
 
 " Other part
@@ -57,6 +56,23 @@ filetype indent on
 set scrolloff=2     " to have always 2 line before/after the cursor
                     " in top/bottom of the screen
 set wildmode=longest,list " to have a bash style autocompletion
+
+" Filetype Settings [require autocmd]
+if has("autocmd")
+
+  filetype indent on
+
+  autocmd FileType gitcommit set noexpandtab
+  autocmd FileType changelog set noexpandtab
+  autocmd FileType make set shiftwidth=8
+
+  autocmd FileType ada set shiftwidth=3
+  "autocmd FileType ada set makeprg=make
+
+  " automatically delete trailing DOS-returns and trailing whitespaces
+  autocmd BufWritePre *.c,*.h,*.y,*.yy,*.l,*.ll,*.C,*.cpp,*.hh,*.cc,*.hxx,*.cxx,*.hpp,*.java,*.rb,*.py,*.m4,*.pl,*.pm silent! %s/[\r \t]\+$//
+endif
+
 " Key mapping
 
 " To manipulate compiling
