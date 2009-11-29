@@ -24,6 +24,12 @@ set ignorecase		" Do case insensitive matching
 set autowrite
 set ttyfast
 
+" Status line
+
+set statusline=[%n]\ %<%f\ %((%1*%M%*%R%Y)%)\ %=%-19(\Line\ [%4l/%4L]\ \Col\ [%02c%03V]%)\ ascii['%03b']\ %P
+highlight StatusLine term=reverse  cterm=bold ctermfg=white ctermbg=lightblue gui=bold guifg=white guibg=blue
+set laststatus=2      " To always view statusline
+
 " Indent Part
 
 set tabstop=8        " Force tabs to be displayed/expanded to 4 spaces (instead of default 8).
