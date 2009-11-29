@@ -20,6 +20,9 @@ set ignorecase		" Do case insensitive matching
 "set autowrite		" Automatically save before commands like :next and :make
 "set hidden             " Hide buffers when they are abandoned
 "set mouse=a		" Enable mouse usage (all modes) in terminals
+"set background=dark
+set autowrite
+set ttyfast
 
 " Indent Part
 
@@ -33,6 +36,9 @@ set expandtab        " Turn Tab keypresses into spaces.  Sounds like this is hap
                      "   on lines 1_to_end-of-file.
 set shiftwidth=2     " When auto-indenting, indent by this much.
                      "   (Use spaces/tabs per "expandtab".)
+set directory=~/.vim/tmp " directory to place swap files in
+set title		" set the title of the windows to the current file name
+set autoindent		" always set autoindenting on
 filetype indent on
 
 
