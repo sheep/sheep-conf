@@ -57,3 +57,14 @@ filetype indent on
 set scrolloff=2     " to have always 2 line before/after the cursor
                     " in top/bottom of the screen
 set wildmode=longest,list " to have a bash style autocompletion
+" Key mapping
+
+" To manipulate compiling
+map <F5> :make<CR>
+map <F6> :cp<CR>
+map <F7> :cn<CR>
+map <F8> :cwindow<CR>
+
+" Change buffer
+map <C-N> :bn<CR>
+map <C-P> :bp<CR>
