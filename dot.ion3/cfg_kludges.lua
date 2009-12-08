@@ -44,14 +44,17 @@ defwinprop{
 
 
 -- Associate an application to a frame.
+-- To rename a frame: mod_query.query_renameframe(_)
 
 defwinprop {
+  -- Netsoul client on PIE (EPITA)
   class = "Xm",
   instance = "ns_xm",
   target = "*scratchpad*",
 }
 
 defwinprop {
+  -- Netsoul client
   class = "Soulmebaby",
   instance = "soulmebaby",
   target = "chatsframe",
@@ -64,9 +67,23 @@ defwinprop {
 }
 
 defwinprop {
+  -- Firefox for Debian
   class = "Iceweasel",
   instance = "Navigator",
-  target = "firefoxframe",
+  target = "browserframe",
+}
+
+defwinprop {
+  -- Firefox for ArchLinux
+  class = "Shiretoko",
+  instance = "Navigator",
+  target = "browserframe",
+}
+
+defwinprop {
+  class = "Google-chrome",
+  instance = "google-chrome",
+  target = "browserframe",
 }
 
 -- Define some additional title shortening rules to use when the full
