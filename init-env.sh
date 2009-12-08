@@ -28,7 +28,7 @@ apply dot.vimrc .vimrc
 apply dot.vim  .vim
 apply zshrc .zshrc
 apply dot.screenrc .screenrc
-apply epita/dot.ion3 .ion3
+apply dot.ion3 .ion3
 apply gostai/dot.Xdefaults .Xdefaults
 apply dot.Xmodmap .Xmodmap
 apply dot.colorgccrc .colorgccrc
