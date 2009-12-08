@@ -1,2 +1,3 @@
 dot.vim/tmp/*
-epita/dot.ion3/default-session--0
+dot.ion3/default-session--0
+dot.ion3/save_statusbar.lua
