@@ -54,7 +54,7 @@ if not ctrl_statusbar.settings then
   ctrl_statusbar.settings = {
     seperator = '||',
     opening = "[ ",
-    closing = " ]",
+    closing = " ] %filler%systray",
 
     -- whatever you add in active will be put in a single string
     -- one after the other in the same order, and that's what you'll
