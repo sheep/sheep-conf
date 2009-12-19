@@ -23,7 +23,11 @@ local function battery()
    elseif state == "Charging" then
       state = "+"
    else
+      -- Discharge
       state = "-"
+      local _, _, remaining = string.find(output, "Battery 0: [a-zA-Z]*, [0-9]*., ([0-9]+:[0-9]+):[0-9]+ rem.*\n")
+      remaining = " ("..remaining..")"
+      state = state..remaining
       if tonumber(charge) < 25 then
          hint = "critical"
       end
