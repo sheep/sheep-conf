@@ -29,6 +29,17 @@ set ttyfast
 colorscheme candycode
 "colorscheme fnaqevan
 
+" GUI
+
+if has("gui_running")
+
+  set guioptions-=T     " Remove tool bar
+  set noguipty
+
+  highlight Normal gui=NONE guibg=Black guifg=White
+
+endif
+
 " Status line
 
 set statusline=[%n]\ %<%f\ %((%1*%M%*%R%Y)%)\ %=%-19(\Line\ [%4l/%4L]\ \Col\ [%02c%03V]%)\ ascii['%03b']\ %P
