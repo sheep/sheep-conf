@@ -29,8 +29,7 @@ cc: /usr/bin/cc
 g++: /usr/bin/g++
 # g77: /usr/bin/g77
 # gcj: /usr/bin/gcj
-# gnat: /usr/bin/gnat
-gnat: /goinfre/perard_a/gnat-2009-i686-gnu-linux-libc2.3-bin/bin/gnat
+gnat: /usr/bin/gnat
 # gpc: /usr/bin/gpc
 
 # Don't do color if our terminal type ($TERM) is one of these.
