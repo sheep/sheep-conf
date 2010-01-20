@@ -24,6 +24,11 @@ set ignorecase		" Do case insensitive matching
 set autowrite
 set ttyfast
 
+" Colors Scheme
+
+colorscheme candycode
+"colorscheme fnaqevan
+
 " Status line
 
 set statusline=[%n]\ %<%f\ %((%1*%M%*%R%Y)%)\ %=%-19(\Line\ [%4l/%4L]\ \Col\ [%02c%03V]%)\ ascii['%03b']\ %P
