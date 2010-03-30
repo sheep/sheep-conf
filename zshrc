@@ -92,32 +92,9 @@ alias cl=cdls
 # ZSH OPTIONS #
 ###############
 
-setopt correct                  # spelling correction
-setopt complete_in_word         # not just at the end
-setopt alwaystoend              # when completing within a word, move cursor to the end of the word
-setopt auto_cd                  # change to dirs without cd
-setopt hist_ignore_all_dups     # If a new command added to the history list duplicates an older one, the older is removed from the list
-setopt hist_find_no_dups        # do not display duplicates when searching for history entries
-setopt auto_list                # Automatically list choices on an ambiguous completion.
-setopt auto_param_keys          # Automatically remove undesirable characters added after auto completions when necessary
-setopt auto_param_slash         # Add slashes at the end of auto completed dir names
-#setopt no_bg_nice               # ??
-setopt complete_aliases
-setopt equals                   # If a word begins with an unquoted `=', the remainder of the word is taken as the name of a command.
-                                # If a command exists by that name, the word is replaced by the full pathname of the command.
-setopt extended_glob            # activates: ^x         Matches anything except the pattern x.
-                                #            x~y        Match anything that matches the pattern x but does not match y.
-                                #            x#         Matches zero or more occurrences of the pattern x.
-                                #            x##        Matches one or more occurrences of the pattern x.
-setopt hash_cmds                # Note the location of each command the first time it is executed in order to avoid search during subsequent invocations
-setopt hash_dirs                # Whenever a command name is hashed, hash the directory containing it
-#setopt mail_warning            # Print a warning message if a mail file has been accessed since the shell last checked.
-setopt append_history           # append history list to the history file (important for multiple parallel zsh sessions!)
-setopt sh_word_split # Do not quote expanded vars. Fait que zsh se comporte comme sh avec les variables
-
-HISTFILE=~/.zsh_history
-SAVEHIST=1000
-HISTSIZE=1000
+if [ -f ~/.myconf/zsh_options ]; then
+  source ~/.myconf/zsh_options
+fi
 
 LOGCHECK=60
 WATCHFMT="%n has %a %l from %M"
