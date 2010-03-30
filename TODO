@@ -3,3 +3,7 @@ I have to do my conf.
 Replace ${HOME} in .gitconfig by $HOME.
 Add .gitignore in repos.
 Fixme of colorgcc.
+
+Add vimperator config.
+
+Add extra conf for a local computer.
