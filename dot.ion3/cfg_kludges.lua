@@ -81,6 +81,13 @@ defwinprop {
 }
 
 defwinprop {
+  -- Firefox 3.6 for ArchLinux
+  class = "Namoroka",
+  instance = "Navigator",
+  target = "browserframe",
+}
+
+defwinprop {
   class = "Google-chrome",
   instance = "google-chrome",
   target = "browserframe",
