@@ -131,3 +131,10 @@ map <space>o :BufExplorer<CR>
 map <space>t :tabnew<CR>
 map <space>k :tabn<CR>
 map <space>j :tabp<CR>
+
+" ctags mappings {
+" refresh systags
+"map <F11> :! ctags -f ~/.vim/systags -R /usr/include /usr/local/include<CR>
+"set tags+=~/.vim/systags
+map <F11> :! ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+imap <C-SPACE> <C-X><C-O>
