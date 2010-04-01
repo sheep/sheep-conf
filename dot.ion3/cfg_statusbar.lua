@@ -51,6 +51,7 @@ if not ctrl_statusbar.configurations then
 end
 
 if not ctrl_statusbar.settings then
+  -- TODO Get default active and inactive from a file.
   ctrl_statusbar.settings = {
     seperator = '||',
     opening = "[ ",
