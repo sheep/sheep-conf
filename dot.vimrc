@@ -71,6 +71,21 @@ set autoindent		" always set autoindenting on
 "help tabstop         " Find out more about this stuff.
 "help vimrc           " Find out more about .vimrc/_vimrc :-)
 
+" Folding {
+  set foldenable                  " Turn on folding
+  set foldmarker={,}              " Fold C style code (only use this as default
+                                  " if you use a high foldlevel)
+  set foldmethod=marker           " Fold on the marker
+  set foldlevel=100               " Don't autofold anything (but I can still
+			          " fold manually)
+  set foldopen=block,hor,mark,percent,quickfix,tag 	" what movements
+							" open folds
+  function SimpleFoldText() " {
+    return getline(v:foldstart).' '
+  endfunction " }
+  set foldtext=SimpleFoldText()   " Custom fold text function
+				  " (cleaner than default)
+" }
 
 set scrolloff=2     " to have always 2 line before/after the cursor
                     " in top/bottom of the screen
