@@ -114,6 +114,12 @@ map <F6> :cp<CR>
 map <F7> :cn<CR>
 map <F8> :cwindow<CR>
 
-" Change buffer
+" buffer stuffs
 map <C-N> :bn<CR>
 map <C-P> :bp<CR>
+map <space>l :bn<CR>
+map <space>h :bp<CR>
+map <space>o :BufExplorer<CR>
+map <space>t :tabnew<CR>
+map <space>k :tabn<CR>
+map <space>j :tabp<CR>
