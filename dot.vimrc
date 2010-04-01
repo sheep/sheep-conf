@@ -33,9 +33,12 @@ colorscheme candycode
 
 if has("gui_running")
 
-  set guioptions-=T     " Remove tool bar
+  "set guioptions-=T     " Remove tool bar
+  set guioptions=       " Remove all
   set noguipty
+  set mousehide 	" hide the mouse cursor when typing
 
+  " Change background only if in GUI (not in term)
   highlight Normal gui=NONE guibg=Black guifg=White
 
 endif
