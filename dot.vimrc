@@ -88,7 +88,15 @@ set autoindent		" always set autoindenting on
 
 set scrolloff=2     " to have always 2 line before/after the cursor
                     " in top/bottom of the screen
-set wildmode=longest,list " to have a bash style autocompletion
+
+" Command line
+" Suffixes file to ignore on completion.
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
+set wildignore=.o
+" set wildmode=longest,list " to have a bash style autocompletion
+"set wildmode=list:longest,full,longest:full
+set wildmode=longest:full,full
+set wildmenu
 
 " Filetype Settings [require autocmd]
 if has("autocmd")
