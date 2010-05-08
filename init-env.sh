@@ -52,3 +52,6 @@ mkdir -p "$bin_dir"
 $ln "$conf_dir/script/colorgcc" "$bin_dir/gcc"
 $ln "$conf_dir/script/colorgcc" "$bin_dir/g++"
 $ln "$conf_dir/script/colorgcc" "$bin_dir/cc"
+
+apply vimperator/.vimperatorrc .vimperatorrc
+apply vimperator/.vimperator .vimperator
