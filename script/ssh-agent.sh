@@ -1,15 +1,35 @@
-# Pour que les variables d'environnement de l'agent ssh soit chargee,
-# il faut ajouter un alias dans la conf de votre shell preferer.
+#! /bin/sh
+
+# Add this in your .$(SHELL)rc, you have choice between an alias or a function
 #
-# alias myagent="/path/to/ssh-agent.sh; source ~/.ssh/ssh-agent.$(hostname)"
+# alias myagent="~/script/myagent \$@; source ~/.ssh/ssh-agent.$(hostname)"
+#
+# myagent() {
+#   ~/script/ssh-agent.sh $@
+#   source ~/.ssh/ssh-agent.$(hostname)
+# }
 
 
 agent=~/.ssh/ssh-agent.$(hostname)
 
+life=$((6 * 3600))
+
+if test $# -gt 0; then
+    if test "$1" = '-t'; then
+        if (echo "$2" | grep -Exq '[[:digit:]]+'); then
+            life=$(( $2 * 3600 ))
+        else
+            echo "$2 is not a digit." >&2
+        fi
+    else
+        echo "$1 not recognize" >&2
+    fi
+fi
+
 newAgent ()
 {
-    echo new agent
-    ssh-agent -t 21600 > $agent
+    echo "new agent on $(hostname) of $((life / 3600)) hours"
+    ssh-agent -t $life > $agent
     source $agent > /dev/null
 }
 
@@ -20,7 +40,7 @@ if test -e $agent; then
     if test $? -eq 2; then
         newAgent
     else
-        echo old agnet
+        echo "old agent on $(hostname)"
     fi
 else
     newAgent
