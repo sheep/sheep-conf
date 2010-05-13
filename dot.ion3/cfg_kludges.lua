@@ -62,8 +62,20 @@ defwinprop {
 
 defwinprop {
   class = "Pidgin",
+  instance = "Pidgin",
+  target = "chatsframe",
+}
+
+defwinprop {
+  class = "Pidgin",
   instance = "pidgin",
   target = "chatsframe",
+}
+
+defwinprop {
+  class = "Firefox",
+  instance = "Navigator",
+  target = "browserframe",
 }
 
 defwinprop {
