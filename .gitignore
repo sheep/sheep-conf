@@ -1,3 +1,4 @@
 dot.vim/tmp/*
-dot.ion3/default-session--0
+dot.ion3/default-session--*
 dot.ion3/save_statusbar.lua
+vimperator/.vimperator/info/
