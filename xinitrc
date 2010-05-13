@@ -23,4 +23,4 @@ xscreensaver -no-splash &
 xset dpms 120
 xset +dpms
 
-exec /usr/bin/ion3
+exec ion3
