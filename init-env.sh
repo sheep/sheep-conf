@@ -42,6 +42,8 @@ apply dot.screenrc .screenrc
 apply dot.ion3 .ion3
 apply Xdefaults .Xdefaults
 apply dot.Xmodmap .Xmodmap
+
+# TODO: ion3 must be check if is in the path before applying this next command.
 apply xinitrc .xinitrc
 
 # Setup colorgcc
