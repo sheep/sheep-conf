@@ -66,7 +66,7 @@ function mcpu_refresh()
   for line in io.lines( '/proc/stat' ) do
 
     suc, _, n_user, n_nice, n_system, n_idle, n_iowait, n_irq, n_softirq = string.find( line,
-      '^cpu%d?%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+%d+%s+%d+%s*$' )
+      '^cpu%d?%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+(%d+)%s+%d+%s+%d+%s*.*$' )
 
     if suc then
       -- current values --
