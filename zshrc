@@ -173,6 +173,7 @@ show-man ()
   man ${BUFFER%% *} 2> /dev/null;
 }
 
+# FIXME Don't work on multiline, zsh segv when call zle accept-line.
 my-accept-line ()
 {
     targets="emacs e firefox xpdf gthumb eclipse gnus"
@@ -190,10 +191,10 @@ my-accept-line ()
     zle accept-line
 }
 
-zle -N my-accept-line
+#zle -N my-accept-line
 zle -N show-man # opens the man of the current command
 
-bindkey "" my-accept-line
+#bindkey "" my-accept-line
 
 
 ################
