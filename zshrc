@@ -46,7 +46,7 @@ esac
 # ENV #
 #######
 
-umask 77
+umask 22
 
 # export MALLOC_OPTIONS=J
 
