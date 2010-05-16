@@ -203,12 +203,15 @@ zle -N show-man # opens the man of the current command
 bindkey -e			# bind similaire a emacs
 #bindkey -v			# bind similaire a vim
 
-bindkey '\e[H'	beginning-of-line	# home
-bindkey '\e[F'	end-of-line		# end
-#bindkey '\e[1~'	beginning-of-line	# home
-#bindkey '\e[4~'	end-of-line		# end
-bindkey "\eOP"	run-help		# run-help when F1 is pressed
-bindkey "^[[A"	up-line-or-search	# cursor up
+if test "$TERM" = "linux"; then
+  bindkey '\e[1~'	beginning-of-line	# home
+  bindkey '\e[4~'	end-of-line		# end
+else
+  bindkey '\e[H'	beginning-of-line	# home
+  bindkey '\e[F'	end-of-line		# end
+fi
+#bindkey "\eOP"	run-help		# run-help when F1 is pressed
+#bindkey "^[[A"	up-line-or-search	# cursor up
 #bindkey -s '^B'	" &\n"			# ctrl-B runs it in the background
 #bindkey ' '	magic-space		# also do history expansion on space
 bindkey "\e[3~" delete-char
