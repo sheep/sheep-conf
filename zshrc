@@ -179,9 +179,9 @@ my-accept-line ()
     targets="emacs e firefox xpdf gthumb eclipse gnus"
 
     if test "${+SSH_CONNECTION}" -eq 0; then
-        if ! echo "$BUFFER" | grep -Eq "&!?$"; then
+        if ! echo "$BUFFER" | grep -Eq "&!?[[:space:]]*$"; then
             for t in $targets; do
-                if echo $BUFFER | grep -q "^$t\b"; then
+                if echo "$BUFFER" | grep -q "^$t\b"; then
                     BUFFER="$BUFFER&!"
                     break
                 fi
