@@ -1,2 +1,8 @@
 " To make Vimperator use hinting properly on gmail and detect buttons like Archive, Report Spam, and Delete, I use the following in my .vimperatorrc:
 " set hinttags="//*[@onclick or @onmouseover or @onmousedown or @onmouseup or @oncommand or @class='lk' or @role='link' or @role='button' or @role='option'] | //input[not(@type='hidden')] | //a | //area | //iframe | //textarea | //button | //select | //xhtml:input[not(@type='hidden')] | //xhtml:a | //xhtml:area | //xhtml:iframe | //xhtml:textarea | //xhtml:button | //xhtml:select | //div[contains(@class,'J-K-I J-J5-Ji')]"
+
+" When on gmail, vimperator go automagicly on pass through mode.
+"autocmd LocationChange .* -js modes.passAllKeys = /mail\.google\.com/.test(buffer.URL)
+"gmail and reader
+autocmd LocationChange .* -js modes.passAllKeys = /(www|mail)\.google\.com\/(reader|mail)/.test(buffer.URL)
+
