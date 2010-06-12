@@ -52,6 +52,7 @@ export REPLYTO='anthony.perard@gmail.com'
 export SHELL='zsh'
 
 test -d $HOME/bin && export PATH="$HOME/bin:$PATH"
+test -d /usr/local/bin && export PATH="$PATH:/usr/local/bin"
 
 export EDITOR='vim'
 export HGEDITOR='~/.myconf/hgeditor'
