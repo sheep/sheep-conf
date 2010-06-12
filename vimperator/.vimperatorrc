@@ -4,5 +4,5 @@
 " When on gmail, vimperator go automagicly on pass through mode.
 "autocmd LocationChange .* -js modes.passAllKeys = /mail\.google\.com/.test(buffer.URL)
 "gmail and reader
-autocmd LocationChange .* -js modes.passAllKeys = /(www|mail)\.google\.com\/(reader|mail)/.test(buffer.URL)
+autocmd LocationChange .* -js modes.passAllKeys = /(www|mail)\.google\.(com|fr|co\.uk)\/(reader|mail)/.test(buffer.URL)
 
