@@ -105,6 +105,12 @@ defwinprop {
   target = "browserframe",
 }
 
+defwinprop {
+  class = "Chromium",
+  instance = "chromium",
+  target = "browserframe",
+}
+
 -- Flash player opens full-screen windows from Firefox with size
 -- request 200x200.  It closes them if they lose focus, but also if
 -- they get focus too quickly.  Therefore set focus 200 ms after
