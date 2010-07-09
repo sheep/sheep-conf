@@ -1,0 +1,5 @@
+*.pyc
+*.pyo
+history.actions
+history.progs
+history.tags

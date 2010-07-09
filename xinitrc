@@ -6,7 +6,7 @@ export PAGER='most -s'
 # Load .Xdefaults
 test -f .Xdefaults && xrdb .Xdefaults
 
-which trayion && trayion &
+#which trayion && trayion &
 
 # Add a ssh-agent
 if which gnome-keyring-daemon; then
@@ -23,4 +23,7 @@ xscreensaver -no-splash &
 xset dpms 120
 xset +dpms
 
-exec ion3
+export PYTHONOPTIMIZE=2
+
+#exec ion3
+exec wmii
