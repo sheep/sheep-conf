@@ -88,7 +88,7 @@ fi
 rename () {echo -ne "\033]0;$@\007"; }
 
 #function fun
-cdls () { cd $1 && ls }
+cdls () { cd "$1" && ls }
 alias cl=cdls
 
 ###############
