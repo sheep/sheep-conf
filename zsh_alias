@@ -49,6 +49,12 @@ which svn-wrapper.sh >/dev/null && alias svn='svn-wrapper.sh'
 
 alias ssh-agent='ssh-agent -t 2700'
 
+myagent() {
+    ~/.myconf/script/ssh-agent.sh $@
+    source ~/.ssh/ssh-agent.$(hostname)
+}
+
+
 # alias to some script.
 alias ns='~/script/ns_who.sh'
 alias sn=ns
