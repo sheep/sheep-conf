@@ -13,7 +13,7 @@ wmii['focuscolors'] = '#cae682', '#505860', '#303840'
 wmii['border'] = 5
 
 wmii.tagrules = (
-    ('Chromium|Firefox|Opera|Shiretoko', 'web'),
+    ('Chromium|Firefox|Opera|Shiretoko|Namoroka', 'web'),
     ('Pidgin|XChat', 'chat'),
     ('Icedove', 'mail'),
 )
