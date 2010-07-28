@@ -1,31 +1,18 @@
 # This git config file is for git 1.5.4
 # Check if is compatible with git 1.6
+# vim :set noexpandtab sw=8:
 
 [user]
 	name = Anthony PERARD
 	email = anthony.perard@gmail.com
+
 [color]
 	diff = auto
 	status = auto
 	ui = auto
 
-#  [color]
-#    branch = auto
-#    diff = auto
-#    status = auto
-#  [color "branch"]
-#    current = yellow reverse
-#    local = yellow
-#    rfgemote = green
-#  [color "diff"]
-#    meta = yellow bold
-#    frag = magenta bold
-#    old = red bold
-#    new = green bold
-#  [color "status"]
-#    added = yellow
-#    changed = green
-#    untracked = cyan
+[diff]
+	renames = yes
 
 [alias]
 	# Checkout -b
@@ -42,9 +29,6 @@
 	br = branch
 	# Branch -a
 	bra = branch -a
-
-	# Full checkout
-	full = !"f() { echo \"Full init gostai.com:$1\"; git clone git@svn.gostai.com:$1 && cd $1; sleep 1; if test "$2" = "master"; then git checkout master else git cob $2; fi; git br $2 && git subi && git subu; }; f"
 
 	sta = stash
 	stap = stash apply
