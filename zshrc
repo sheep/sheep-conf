@@ -98,10 +98,6 @@ if [ -f ~/.myconf/zsh_options ]; then
   source ~/.myconf/zsh_options
 fi
 
-LOGCHECK=60
-WATCHFMT="%n has %a %l from %M"
-WATCH=all
-
 fpath=(~/.zsh/functions $fpath)
 
 ##########

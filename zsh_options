@@ -33,5 +33,10 @@ HISTFILE=~/.zsh_history
 SAVEHIST=1000
 HISTSIZE=2000
 
+# Login and logout watch
+LOGCHECK=60
+WATCHFMT="%n has %a %l from %M"
+WATCH=notme                     # see only logged in/out event of user username (or all or notme).
+
 # Module
 autoload zmv
