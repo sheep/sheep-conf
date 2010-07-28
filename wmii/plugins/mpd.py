@@ -126,18 +126,18 @@ if has_pympd:
       ('XF86AudioStop', "Stop",
         lambda k: stop()),
       ('XF86AudioNext', "Next music",
-        lambda k: next()),
+        lambda k: next(True)),
       ('XF86AudioPrev', "Previous music",
-        lambda k: previous()),
+        lambda k: next(False)),
 
       ('%(mod)s-Home', "Play/Pause",
         lambda k: pause()),
       ('%(mod)s-End', "Stop",
         lambda k: stop()),
       ('%(mod)s-Next', "Next music",
-        lambda k: next()),
+        lambda k: next(True)),
       ('%(mod)s-Prior', "Previous music",
-        lambda k: previous()),
+        lambda k: next(False)),
     ))
 
 #${mod}-Prior: play_previous_song
