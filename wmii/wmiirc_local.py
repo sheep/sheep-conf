@@ -23,11 +23,14 @@ wmii.colrules = (
 )
 
 terminal = 'wmiir', 'setsid', 'xterm'
+browser = 'firefox'
 
 keys.bind('main', (
     "Running programs",
     ('%(mod)s-x', "Launch a terminal",
         lambda k: call(*terminal, background=True)),
+    ('%(mod)s-i', "Launch Firefox",
+        lambda k: call(browser, background=True)),
 
     "Tag actions 2",
     ('%(mod)s-period', "Move to the view to the left",
