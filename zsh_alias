@@ -28,16 +28,12 @@ alias mv="mv -i"
 alias df="df -h"
 alias du="du -h"
 
-alias e="emacs 2> /dev/null"
 alias screen="screen -aRAdU"
 alias diff='diff -u'
 # FIXME: Use egrep, if exist.
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias gnus='emacs -f gnus'
-
-# Zlock for use on PIE.
-which zlock >/dev/null && alias z="zlock -immed"
 
 if [ "$(uname -s)" != "Linux" ]; then
     alias make='gmake --no-print-directory'
@@ -53,11 +49,6 @@ myagent() {
     ~/.myconf/script/ssh-agent.sh $@
     source ~/.ssh/ssh-agent.$(hostname)
 }
-
-
-# alias to some script.
-alias ns='~/script/ns_who.sh'
-alias sn=ns
 
 # global alias
 alias -g L='|less'
