@@ -16,6 +16,14 @@ if [[ $- != *i* ]] ; then
 	return
 fi
 
+# Source a zsh files with auto compile if needed
+_source() {
+  if [ ! -e "$1.zwc" -o "$1" -nt "$1.zwc" ]; then
+    zcompile "$1"
+  fi
+  source "$1"
+}
+
 # Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
 #if [[ -f ~/.dir_colors ]]; then
 #	eval `dircolors -b ~/.dir_colors`
