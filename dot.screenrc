@@ -15,6 +15,9 @@ autodetach on
 defscrollback 5000
 termcapinfo xterm ti@:te@
 
+# Use UTF-8
+defutf8 on
+
 #change the hardstatus settings to give an window list at the bottom of the
 #screen, with the time and date and with the current window highlighted
 hardstatus alwayslastline
