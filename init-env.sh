@@ -58,3 +58,5 @@ $ln "$conf_dir/script/colorgcc" "$bin_dir/cc"
 
 apply vimperator/.vimperatorrc .vimperatorrc
 apply vimperator/.vimperator .vimperator
+# TODO Must check the version of wmii
+apply wmii .wmii
