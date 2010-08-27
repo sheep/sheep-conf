@@ -5,6 +5,7 @@ xterm*foreground:               white
 xterm*scrollBar:                false
 xterm*saveLines:                40000
 xterm*eightBitInput:            false
+xterm*metaSendsEscape:          true
 
 /* emacs */
 Emacs*font:                     7x13bold
