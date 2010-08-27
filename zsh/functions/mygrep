@@ -1,0 +1,12 @@
+## vim:syntax=zsh:
+
+mygrep(){
+    exclude_dir="_build* .git"
+    opt_exclude=`for i in $exclude_dir; do echo -n "--exclude-dir=$i "; done`
+
+    if test -e grep.exclude; then
+        egrep $opt_exclude --exclude-from=grep.exclude -Rn "$@" .
+    else
+        egrep $opt_exclude -Rn "$@" .
+    fi
+}

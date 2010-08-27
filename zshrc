@@ -84,8 +84,8 @@ export MAKE=make
 # Alias #
 #########
 
-if [ -f ~/.myconf/zsh_alias ]; then
-    source ~/.myconf/zsh_alias
+if [ -f ~/.zsh/alias ]; then
+    _source ~/.zsh/alias
 fi
 
 ############
@@ -99,12 +99,16 @@ rename () {echo -ne "\033]0;$@\007"; }
 cdls () { cd "$1" && ls }
 alias cl=cdls
 
+if [ -f ~/.zsh/functions_all ]; then
+  _source ~/.zsh/functions_all
+fi
+
 ###############
 # ZSH OPTIONS #
 ###############
 
-if [ -f ~/.myconf/zsh_options ]; then
-  source ~/.myconf/zsh_options
+if [ -f ~/.zsh/options ]; then
+  _source ~/.zsh/options
 fi
 
 fpath=(~/.zsh/functions $fpath)
