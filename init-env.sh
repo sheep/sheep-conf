@@ -38,6 +38,7 @@ apply gitconfig .gitconfig
 apply dot.vimrc .vimrc
 apply dot.vim  .vim
 apply zshrc .zshrc
+apply zsh .zsh
 apply dot.screenrc .screenrc
 apply dot.ion3 .ion3
 apply Xdefaults .Xdefaults
