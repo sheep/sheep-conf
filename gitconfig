@@ -64,7 +64,7 @@
         rwdone=!"d=`git rev-parse --git-dir`; test -f $d/rewrite && git rebase --onto HEAD `cat $d/rewrite`"
 [core]
 	legacyheaders = false
-	excludesfile = ${HOME}/.gitignore
+	excludesfile = ~/.gitignore
 [repack]
 	usedeltabaseoffset = true
 [gui]
