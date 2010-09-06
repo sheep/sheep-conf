@@ -31,7 +31,7 @@ keys.bind('main', (
     "Running programs",
     ('%(mod)s-x', "Launch a terminal",
         lambda k: call(*terminal, background=True)),
-    ('%(mod)s-i', "Launch Firefox",
+    ('%(mod)s-F5', "Launch Firefox",
         lambda k: call(browser, background=True)),
 
     "Tag actions 2",
