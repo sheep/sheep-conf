@@ -90,6 +90,11 @@ def update(self):
             song = ''
             if status.state in ('play', 'pause'):
                 song = ' %s' % songstr(mpd.currentsong())
+            elif status.state == "":
+                # an error make mpd.status to have "play", "", alternatively, and no song
+                # so make to try to cache this error.
+                mpd = None
+                return wmii.cache['normcolors'], "mpd: error"
             return wmii.cache['normcolors'], 'mpd: (%s) %s' % (status.state, song)
     except Exception, e:
         mpd = None  # try to reconnect if connection is lost
