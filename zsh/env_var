@@ -1,0 +1,3 @@
+# ack color options
+export ACK_COLOR_FILENAME='green'
+export ACK_COLOR_MATCH='bold red'

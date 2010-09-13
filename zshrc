@@ -80,6 +80,8 @@ export MAKE=make
 # config.site
 #export CONFIG_SITE="$HOME/config.site"
 
+_source ~/.zsh/env_var
+
 #########
 # Alias #
 #########
