@@ -18,7 +18,7 @@ fi
 
 # Source a zsh files with auto compile if needed
 _source() {
-  if [ ! -e "$1.zwc" -o "$1" -nt "$1.zwc" ]; then
+  if [ -f "$1" -a ! -e "$1.zwc" -o "$1" -nt "$1.zwc" ]; then
     zcompile "$1"
   fi
   source "$1"
