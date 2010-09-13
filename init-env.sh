@@ -40,7 +40,7 @@ apply dot.vim  .vim
 apply zshrc .zshrc
 apply zsh .zsh
 apply dot.screenrc .screenrc
-apply dot.ion3 .ion3
+apply ion3 .ion3
 apply Xdefaults .Xdefaults
 apply dot.Xmodmap .Xmodmap
 
