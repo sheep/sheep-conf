@@ -5,15 +5,21 @@ import pygmi
 from pygmi import *
 from utils import parse_file
 
+print_cpu_freq = 0
+print_cpu_load = 1
+print_cpu_temp = 0
+
 sensor = "THM"
 path_temp = "/proc/acpi/thermal_zone/%s/temperature" % sensor
 path_cpuinfo = '/proc/cpuinfo'
 path_stats = '/proc/stat'
 
-
-re_cpu = re.compile(r'^cpu MHz\s*:\s*(?P<mhz>\d+).*$')
-re_stats = re.compile(r'^cpu(?P<cpu>\d+) (?P<user>\d+) (?P<system>\d+) (?P<nice>\d+) (?P<idle>\d+).*$')
-re_temp = re.compile(r'^temperature:\s*(?P<temp>\d+)\s+(?P<unit>.*)$')
+if print_cpu_freq:
+  re_cpu = re.compile(r'^cpu MHz\s*:\s*(?P<mhz>\d+).*$')
+if print_cpu_load:
+  re_stats = re.compile(r'^cpu(?P<cpu>\d+) (?P<user>\d+) (?P<system>\d+) (?P<nice>\d+) (?P<idle>\d+).*$')
+if print_cpu_temp:
+  re_temp = re.compile(r'^temperature:\s*(?P<temp>\d+)\s+(?P<unit>.*)$')
 
 old_stats = dict(user = 0, system = 0, nice = 0, idle = 0)
 
@@ -25,48 +31,59 @@ def cpu_stat_init():
 
 def cpu_stat_next():
   stat_vals = parse_file(path_stats, re_stats)
-  stat_vals = dict([(k, [int(w) for w in v]) for k, v in stat_vals.items()])
-  total = list()
-  for i in stat_vals['cpu']:
-    dtotal = \
-        stat_vals['user'][i]   - old_stats['user'][i]   + \
-        stat_vals['system'][i] - old_stats['system'][i] + \
-        stat_vals['nice'][i]   - old_stats['nice'][i]   + \
-        stat_vals['idle'][i]   - old_stats['idle'][i]
-    total.append( \
-      '%02d%%' % (100 - ((stat_vals['idle'][i] - old_stats['idle'][i]) * 100 / dtotal)))
-  old_stats.update(stat_vals)
-  return ','.join(total)
-
+  try:
+    stat_vals = dict([(k, [int(w) for w in v]) for k, v in stat_vals.items()])
+    total = list()
+    for i in stat_vals['cpu']:
+      dtotal = \
+          stat_vals['user'][i]   - old_stats['user'][i]   + \
+          stat_vals['system'][i] - old_stats['system'][i] + \
+          stat_vals['nice'][i]   - old_stats['nice'][i]   + \
+          stat_vals['idle'][i]   - old_stats['idle'][i]
+      total.append( \
+        '%02d%%' % (100 - ((stat_vals['idle'][i] - old_stats['idle'][i]) * 100 / dtotal)))
+    old_stats.update(stat_vals)
+    return ','.join(total)
+  except Exception, e:
+    cpu = 'error: %s,' % e
 
 def mhz_to_ghz(v):
   return "%.1f" % (int(v) / 1000.0)
 
-def update(self):
+def cpu_freq_get():
   cpu_vals = parse_file(path_cpuinfo, re_cpu)
-  temp_vals = parse_file(path_temp, re_temp)
-
   cpu = '--'
   try:
     cpu = '/'.join(map(mhz_to_ghz, cpu_vals['mhz']))
   except Exception, e:
     cpu = 'error: %s,' % e
+  return cpu
 
-  load = '--'
-  try:
-    load = cpu_stat_next()
-  except Exception, e:
-    load = 'error: %s,' % e
-
+def cpu_temp_get():
+  temp_vals = parse_file(path_temp, re_temp)
   temp = '--'
   try:
     temp = '%02d%s' % (int(temp_vals['temp'][0]), temp_vals['unit'][0])
   except Exception, e:
     temp = 'error: %s,' % e
+  return temp
 
-  return wmii.cache['normcolors'], "cpu: %s GHz (%s) [%s]" % (cpu, load, temp)
-  #return wmii.cache['normcolors'], "cpu: %s%% [%s]" % (load, temp)
+def update(self):
+  cpu = load = temp = ''
+
+  try:
+      if print_cpu_freq:
+          cpu = " %s GHz" % cpu_freq_get()
+      if print_cpu_load:
+          load = " (%s)" % cpu_stat_next()
+      if print_cpu_temp:
+          temp = " [%s]" % cpu_temp_get()
+
+      return wmii.cache['normcolors'], "cpu:%s%s%s" % (cpu, load, temp)
+  except Exception, e:
+      return wmii.cache['normcolors'], "cpu_error: %s" % e
 
 
-cpu_stat_init()
-monitor = defmonitor(update, name='cpu', interval=1)
+if print_cpu_load:
+  cpu_stat_init()
+monitor = defmonitor(update, name='cpu', interval=2)
