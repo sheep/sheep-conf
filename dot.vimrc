@@ -78,7 +78,7 @@ set cinoptions=(0     " Options for the C indentation
   set foldmarker={,}              " Fold C style code (only use this as default
                                   " if you use a high foldlevel)
   set foldmethod=marker           " Fold on the marker
-  set foldlevel=100               " Don't autofold anything (but I can still
+  set foldlevel=1                 " Don't autofold anything (but I can still
 			          " fold manually)
   set foldopen=block,hor,mark,percent,quickfix,tag 	" what movements
 							" open folds
@@ -87,6 +87,27 @@ set cinoptions=(0     " Options for the C indentation
   endfunction " }
   set foldtext=SimpleFoldText()   " Custom fold text function
 				  " (cleaner than default)
+  set foldnestmax=1
+
+  autocmd FileType c,cpp setl foldexpr=FoldBrace()
+  autocmd FileType c,cpp setl foldmethod=expr
+
+  function FoldBrace()
+      " don't fold #define foo do { } while (0)
+      if getline(v:lnum) =~ '{.*}'
+          return -1
+      endif
+      if getline(v:lnum+1)[0] == '{'
+          return 1
+      endif
+      if getline(v:lnum) =~ '{'
+          return 1
+      endif
+      if getline(v:lnum)[0] =~ '}'
+          return '<1'
+      endif
+      return -1
+  endfunction
 " }
 
 set scrolloff=2     " to have always 2 line before/after the cursor
