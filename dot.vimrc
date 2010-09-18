@@ -65,6 +65,8 @@ set directory=~/.vim/tmp " directory to place swap files in
 set title		" set the title of the windows to the current file name
 set autoindent		" always set autoindenting on
 
+set cinoptions=(0     " Options for the C indentation
+
 
 " Other part
 
@@ -107,6 +109,8 @@ if has("autocmd")
   autocmd FileType gitcommit setl noexpandtab
   autocmd FileType changelog setl noexpandtab
   autocmd FileType make setl shiftwidth=8
+  autocmd FileType c setl shiftwidth=4
+  autocmd FileType cpp setl shiftwidth=4
 
   autocmd FileType ada setl shiftwidth=3
   "autocmd FileType ada set makeprg=make
