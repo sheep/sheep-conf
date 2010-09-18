@@ -19,9 +19,10 @@ set ignorecase		" Do case insensitive matching
 set incsearch		" Incremental search
 set autowrite		" Automatically save before commands like :next and :make
 "set hidden             " Hide buffers when they are abandoned
-"set mouse=a		" Enable mouse usage (all modes) in terminals
+set mouse=a             " Enable mouse usage (all modes) in terminals
 "set background=dark
 set ttyfast
+set splitright          " to have the new window on the right instead of the left, when vertical split
 
 " Colors Scheme
 
@@ -44,7 +45,7 @@ endif
 
 " Status line
 
-set statusline=[%n]\ %<%f\ %((%1*%M%*%R%Y)%)\ %=%-19(\Line\ [%4l/%4L]\ \Col\ [%02c%03V]%)\ ascii['%03b']\ %P
+set statusline=[%n]\ %<%f\ %((%1*%M%*%R%Y)%)\ %=%-19(\Line\ [%4l/%4L]\ \Col\ [%02c%03V]%)\ %P
 highlight StatusLine term=reverse  cterm=bold ctermfg=white ctermbg=lightblue gui=bold guifg=white guibg=blue
 set laststatus=2      " To always view statusline
 
