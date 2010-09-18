@@ -104,11 +104,11 @@ if has("autocmd")
 
   filetype indent on
 
-  autocmd FileType gitcommit set noexpandtab
-  autocmd FileType changelog set noexpandtab
-  autocmd FileType make set shiftwidth=8
+  autocmd FileType gitcommit setl noexpandtab
+  autocmd FileType changelog setl noexpandtab
+  autocmd FileType make setl shiftwidth=8
 
-  autocmd FileType ada set shiftwidth=3
+  autocmd FileType ada setl shiftwidth=3
   "autocmd FileType ada set makeprg=make
 
   " automatically delete trailing DOS-returns and trailing whitespaces
