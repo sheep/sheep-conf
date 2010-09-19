@@ -117,9 +117,7 @@ set scrolloff=2     " to have always 2 line before/after the cursor
 " Suffixes file to ignore on completion.
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 set wildignore=.o
-" set wildmode=longest,list " to have a bash style autocompletion
-"set wildmode=list:longest,full,longest:full
-set wildmode=longest:full,full
+set wildmode=list:longest,list
 set wildmenu
 
 " Filetype Settings [require autocmd]
