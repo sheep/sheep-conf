@@ -35,8 +35,8 @@ apply(){
 }
 
 apply gitconfig .gitconfig
-apply dot.vimrc .vimrc
-apply dot.vim  .vim
+apply vimrc .vimrc
+apply vim  .vim
 apply zshrc .zshrc
 apply zsh .zsh
 apply dot.screenrc .screenrc
