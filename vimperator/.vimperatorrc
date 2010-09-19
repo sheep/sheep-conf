@@ -6,3 +6,6 @@
 "gmail and reader
 autocmd LocationChange .* -js modes.passAllKeys = /(www|mail)\.google\.(com|fr|co\.uk)\/(reader|mail)/.test(buffer.URL)
 
+" Remapping zoom command to use full zoom
+map + zI
+map -- - zO
