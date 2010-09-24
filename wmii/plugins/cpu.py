@@ -22,7 +22,7 @@ path_stats = '/proc/stat'
 if print_cpu_freq:
   re_cpu = re.compile(r'^cpu MHz\s*:\s*(?P<mhz>\d+).*$')
 if print_cpu_load:
-  re_stats = re.compile(r'^cpu(?P<cpu>\d+) (?P<user>\d+) (?P<system>\d+) (?P<nice>\d+) (?P<idle>\d+).*$')
+  re_stats = re.compile(r'^cpu(?P<cpu>\d+) (?P<user>\d+) (?P<system>\d+) (?P<nice>\d+) (?P<idle>\d+) (?P<iowait>\d+).*$')
 if print_cpu_temp:
   re_temp = re.compile(r'^temperature:\s*(?P<temp>\d+)\s+(?P<unit>.*)$')
 
@@ -35,8 +35,8 @@ def cpu_stat_init():
   old_stats.update(stat_vals)
 
 def cpu_stat_next():
-  stat_vals = parse_file(path_stats, re_stats)
   try:
+    stat_vals = parse_file(path_stats, re_stats)
     stat_vals = dict([(k, [int(w) for w in v]) for k, v in stat_vals.items()])
     total = list()
     for i in stat_vals['cpu']:
@@ -44,7 +44,8 @@ def cpu_stat_next():
           stat_vals['user'][i]   - old_stats['user'][i]   + \
           stat_vals['system'][i] - old_stats['system'][i] + \
           stat_vals['nice'][i]   - old_stats['nice'][i]   + \
-          stat_vals['idle'][i]   - old_stats['idle'][i]
+          stat_vals['idle'][i]   - old_stats['idle'][i]   + \
+          stat_vals['iowait'][i] - old_stats['iowait'][i]
       total.append( \
         '%02d%%' % (100 - ((stat_vals['idle'][i] - old_stats['idle'][i]) * 100 / dtotal)))
     old_stats.update(stat_vals)
