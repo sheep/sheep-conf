@@ -1,9 +1,14 @@
 import re
 import os
 
-import pygmi
-from pygmi import *
-from utils import parse_file
+if __name__ != "__main__":
+  import pygmi
+  from pygmi import *
+  from utils import parse_file
+else:
+  import sys
+  sys.path.append("..")
+  from utils import parse_file
 
 print_cpu_freq = 0
 print_cpu_load = 1
@@ -86,4 +91,11 @@ def update(self):
 
 if print_cpu_load:
   cpu_stat_init()
-monitor = defmonitor(update, name='cpu', interval=2)
+
+if __name__ != "__main__":
+  monitor = defmonitor(update, name='cpu', interval=2)
+else:
+  import time
+  while 1:
+    time.sleep(1)
+    print cpu_stat_next()
