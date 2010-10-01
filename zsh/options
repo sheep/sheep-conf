@@ -30,8 +30,8 @@ unsetopt beep
 bindkey -e
 
 HISTFILE=~/.zsh_history
-SAVEHIST=1000
-HISTSIZE=2000
+SAVEHIST=3000
+HISTSIZE=3000
 
 # Login and logout watch
 LOGCHECK=60
