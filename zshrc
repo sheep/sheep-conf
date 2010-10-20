@@ -17,7 +17,7 @@ if [[ $- != *i* ]] ; then
 fi
 
 # Source a zsh files with auto compile if needed
-_source() {
+compile_source() {
   if [ -f "$1" -a ! -e "$1.zwc" -o "$1" -nt "$1.zwc" ]; then
     zcompile "$1"
   fi
@@ -80,14 +80,14 @@ export MAKE=make
 # config.site
 #export CONFIG_SITE="$HOME/config.site"
 
-_source ~/.zsh/env_var
+compile_source ~/.zsh/env_var
 
 #########
 # Alias #
 #########
 
 if [ -f ~/.zsh/alias ]; then
-    _source ~/.zsh/alias
+    compile_source ~/.zsh/alias
 fi
 
 ############
@@ -102,7 +102,7 @@ cdls () { cd "$1" && ls }
 alias cl=cdls
 
 if [ -f ~/.zsh/functions_all ]; then
-  _source ~/.zsh/functions_all
+  compile_source ~/.zsh/functions_all
 fi
 
 ###############
@@ -110,7 +110,7 @@ fi
 ###############
 
 if [ -f ~/.zsh/options ]; then
-  _source ~/.zsh/options
+  compile_source ~/.zsh/options
 fi
 
 fpath=(~/.zsh/functions $fpath)
