@@ -1,4 +1,5 @@
 import os
+import time
 
 import pygmi
 from pygmi import *
@@ -18,6 +19,8 @@ wmii.tagrules = (
     ('Opera', 'web'),
     ('Pidgin|XChat', 'chat'),
     ('Icedove', 'mail'),
+
+    ('trayer', '/.*/'),
 )
 
 wmii.colrules = (
@@ -45,6 +48,11 @@ keys.bind('main', (
         lambda k: Tags().select(Tags().next(True), take_client=Client('sel'))),
 
 ))
+
+trayer = 'trayer', '--expand', 'true', '--widthtype', 'request', \
+    '--height', '5', '--transparent', 'true', '--alpha', '255', \
+    '--edge', 'bottom', '--align', 'right'
+call(*trayer, background=True, preexec_fn=time.sleep(1))
 
 print "Configuration loaded"
 
