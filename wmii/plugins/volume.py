@@ -6,14 +6,21 @@ from pygmi import *
 monitor = None
 mixer = 'Master'
 vol = '0'
+mute = 0
 
 reg_vol = re.compile(r'\[(\d+)%\]')
+reg_mute = re.compile(r'\[(on|off)\]')
 
 def get():
     global vol
+    global mute
 
     output = call('amixer', 'get', mixer)
     vol = reg_vol.findall(output)[0]
+    if reg_mute.findall(output)[0] == "off":
+      mute = 1
+    else:
+      mute = 0
 
 def set(value):
     call('amixer', 'set', mixer, value)
@@ -30,7 +37,10 @@ def mute_volume_toggle():
 
 def update(self):
     get()
-    return wmii.cache['normcolors'], "vol: %s%%" % vol
+    color = wmii.cache['normcolors']
+    if mute != 0:
+      color = ('#ff2030', color[1], color[2])
+    return color, "vol: %s%%" % vol
 
 monitor = defmonitor(update, name='4_volume', interval=60)
 
