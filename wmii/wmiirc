@@ -5,8 +5,10 @@ for p in os.environ.get("WMII_CONFPATH", "").split(':'):
     path += [p, p + '/python']
 sys.path = path + sys.path
 
+# Add ~/bin to the path.
+os.environ['PATH'] = os.environ['HOME'] + "/bin:" + os.environ['PATH']
+
 from pygmi import events
 import wmiirc
 
 events.loop()
-
