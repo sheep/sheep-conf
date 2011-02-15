@@ -1,5 +1,7 @@
 *.pyc
 *.pyo
-history.actions
-history.progs
-history.tags
+/history.actions
+/history.progs
+/history.tags
+plugins/disables/*.py
+plugins/*.sh
