@@ -48,5 +48,5 @@ fi
 
 # Add private key.
 if ! (ssh-add -l 2>/dev/null | grep -q id_rsa); then
-    ssh-add ~/.ssh/id_rsa
+    ssh-add -t $life ~/.ssh/id_rsa
 fi
