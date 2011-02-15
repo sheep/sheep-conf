@@ -6,8 +6,6 @@ export PAGER='most -s'
 # Load .Xdefaults
 test -f .Xdefaults && xrdb .Xdefaults
 
-#which trayion && trayion &
-
 # Add a ssh-agent
 if which gnome-keyring-daemon; then
   eval `gnome-keyring-daemon -s`
@@ -25,5 +23,4 @@ xset +dpms
 
 export PYTHONOPTIMIZE=2
 
-#exec ion3
 exec wmii
