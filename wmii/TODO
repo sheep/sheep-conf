@@ -1,0 +1,5 @@
+- Check if trayer existe and lauch it if is not already running.
+- Add a logger for error.
+- Run chromium or google-chrome, check both
+- check if firefox existe.
+- Add a wmiirc local to a computer.
