@@ -37,6 +37,8 @@ alias gnus='emacs -f gnus'
 
 if [ "$(uname -s)" != "Linux" ]; then
     alias make='gmake --no-print-directory'
+else
+    alias make='make --no-print-directory'
 fi
 
 alias m=make
