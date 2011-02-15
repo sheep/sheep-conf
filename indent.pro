@@ -1,0 +1,12 @@
+--indent-level 4
+--no-tabs
+--braces-on-if-line
+--braces-on-struct-decl-line
+--no-space-after-function-call-names
+--cuddle-else
+--blank-before-sizeof
+--line-length 80
+--case-indentation 4
+--dont-break-procedure-type
+--blank-lines-after-procedures
+-ppi 2
