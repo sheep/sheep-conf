@@ -1,5 +1,3 @@
-dot.vim/tmp/*
-
 # Ion3 files
 ion3/default-session--*
 ion3/save_statusbar.lua
