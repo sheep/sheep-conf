@@ -6,6 +6,10 @@ xterm*scrollBar:                false
 xterm*saveLines:                40000
 xterm*eightBitInput:            false
 xterm*metaSendsEscape:          true
+/* for cutting chars */
+xterm*charClass:                33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48,35:48,58:48,63:48,61:48,44:48,38:48,59:48
+xterm*on4Clicks:                group
+xterm*pointerMode:              1
 
 /* emacs */
 Emacs*font:                     7x13bold
