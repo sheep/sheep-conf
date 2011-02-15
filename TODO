@@ -1,9 +1,3 @@
-I have to do my conf.
-
-Replace ${HOME} in .gitconfig by $HOME.
-Add .gitignore in repos.
-Fixme of colorgcc.
-
-Add vimperator config.
-
-Add extra conf for a local computer.
+- Add .gitignore in repos.
+- Add extra conf for a local computer.
+- colorgcc, Force color output for non tty with a env var.
