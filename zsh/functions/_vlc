@@ -1,0 +1,8 @@
+#compdef vlc cvlc
+
+_vlc() {
+  _files -g "*.(avi|mkv|wmv|flv)"
+}
+
+# run the main dispatcher
+_vlc "$@"
