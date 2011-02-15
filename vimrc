@@ -75,8 +75,6 @@ set cinoptions=(0     " Options for the C indentation
 
 " Folding {
   set foldenable                  " Turn on folding
-  set foldmarker={,}              " Fold C style code (only use this as default
-                                  " if you use a high foldlevel)
   set foldmethod=marker           " Fold on the marker
   set foldlevel=1                 " Don't autofold anything (but I can still
 			          " fold manually)
