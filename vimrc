@@ -167,3 +167,6 @@ map zk zk[z
 "set tags+=~/.vim/systags
 map <F11> :! ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 imap <C-SPACE> <C-X><C-O>
+
+" cscope mapping
+nmap <F12> :! cscope -bqR<CR>:cs reset<CR>
