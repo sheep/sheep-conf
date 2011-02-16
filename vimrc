@@ -33,6 +33,8 @@ colorscheme candycode
 
 if has("gui_running")
 
+  colorscheme candycode
+
   "set guioptions-=T     " Remove tool bar
   set guioptions=       " Remove all
   set noguipty
