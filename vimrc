@@ -65,7 +65,7 @@ set directory=~/.vim/tmp " directory to place swap files in
 set title		" set the title of the windows to the current file name
 set autoindent		" always set autoindenting on
 
-set cinoptions=(0     " Options for the C indentation
+set cinoptions=(0,:0,l1,t0     " Options for the C indentation (qemu, linux)
 
 
 " Other part
@@ -135,6 +135,9 @@ if has("autocmd")
   " automatically delete trailing DOS-returns and trailing whitespaces
   autocmd BufWritePre *.c,*.h,*.y,*.yy,*.l,*.ll,*.C,*.cpp,*.hh,*.cc,*.hxx,*.cxx,*.hpp,*.java,*.rb,*.py,*.m4,*.pl,*.pm silent! %s/[\r \t]\+$//
 endif
+
+" teak sh indent
+let g:sh_indent_case_labels=1
 
 " Key mapping
 
