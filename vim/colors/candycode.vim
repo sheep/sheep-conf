@@ -14,7 +14,7 @@ set cpo&vim
 " text {{{
 
 hi Normal       guifg=#ffffff       guibg=#050505       gui=NONE
-            \   ctermfg=white       ctermbg=black       cterm=NONE
+            \   ctermfg=LightGrey   ctermbg=black       cterm=NONE
 
 hi Folded       guifg=#c2bfa5       guibg=#050505       gui=underline
             \   ctermfg=lightgray   ctermbg=black       cterm=underline
