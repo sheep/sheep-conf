@@ -238,7 +238,7 @@ function! RangeCommentLine()
       execute ":silent! normal :nohlsearch\<CR>:s/\\(.*\\*\\/\\)/\\/\\*\\1/\<CR>:nohlsearch\<CR>=="
     " if there are no comments on this line
     elseif stridx(getline("."), "\/\*") == -1 && stridx(getline("."), "\*\/") == -1
-      execute ":silent! normal :s/\\(\\S.*$\\)/\\/\\*\\1\\*\\//\<CR>:nohlsearch\<CR>=="
+      execute ":silent! normal :s/\\(\\S.*$\\)/\\/\\* \\1 \\*\\//\<CR>:nohlsearch\<CR>"
     endif
   " .html,.xml,.xthml,.htm
   elseif file_name =~ '\.html$' || file_name =~ '\.htm$' || file_name =~ '\.xml$' || file_name =~ '\.xhtml$' 
@@ -295,7 +295,7 @@ function! RangeUnCommentLine()
     execute ":silent! normal :s/\\/\\///\<CR>:nohlsearch\<CR>=="
   " for .c or .h or .pc or .css files use /* */
   elseif file_name =~ '\.c$' || file_name =~ '\.h$' || file_name =~ '\.pc$' || file_name =~ '\.css$' || file_name =~ '\.js$'
-    execute ":silent! normal :nohlsearch\<CR>:s/\\/\\*//\<CR>:s/\\*\\///\<CR>:nohlsearch\<CR>=="
+    execute ":silent! normal :nohlsearch\<CR>:s/\\/\\* \\?//\<CR>:s/ \\?\\*\\///\<CR>:nohlsearch\<CR>=="
   " for .vim files use " 
   elseif file_name =~ '\.vim$' || file_name =~ '\.vimrc$'
     execute ":silent! normal :s/\\\"//\<CR>:nohlsearch\<CR>"
