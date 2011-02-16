@@ -157,6 +157,10 @@ map <space>t :tabnew<CR>
 map <space>k :tabn<CR>
 map <space>j :tabp<CR>
 
+" move over folds
+" move upwards to the start of the previous fold.
+map zk zk[z
+
 " ctags mappings {
 " refresh systags
 "map <F11> :! ctags -f ~/.vim/systags -R /usr/include /usr/local/include<CR>
