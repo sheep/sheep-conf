@@ -52,6 +52,10 @@ myagent() {
     source ~/.ssh/ssh-agent.$(hostname)
 }
 
+todo() {
+  sh -c "cd; ~/.myconf/script/todo.sh $@"
+}
+
 # global alias
 alias -g L='|less'
 alias -g G='|egrep'
