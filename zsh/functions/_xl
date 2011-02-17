@@ -1,0 +1,274 @@
+#compdef xl
+
+local context state line
+typeset -A opt_args
+typeset -A val_args
+
+# optons for passing to _arguments: main xl commands
+_xl_commands=(
+    "list[list information about all domains]"
+    "create[create a domain from config file]"
+    "destroy[terminate a domain immediately]"
+    "pci-attach[insert a new pass-through pci device]"
+    "pci-detach[remove a domain's pass-through pci device]"
+    "pci-list[list pass-through pci devices for a domain]"
+    "pause[pause execution of a domain]"
+    "unpause[unpause a paused domain]"
+    "console[attach to domain's console]"
+    "save[save a domain state to restore later]"
+    "restore[restore a domain from a saved state]"
+    "cd-insert[insert a cdrom into a guest's cd drive]"
+    "cd-eject[eject a cdrom from a guest's cd drive]"
+    "mem-set[set the current memory usage for a domain]"
+    "button-press[indicate an ACPI button press to the domain]"
+    "vcpu-list[list the VCPUs for all/some domains.]"
+    "vcpu-pin[Set which CPUs a VCPU can use.]"
+    "vcpu-set[Set the number of active VCPUs allowed for the domain.]"
+    "network-attach[Create a new virtual network device.]"
+    "network-list[List virtual network interfaces for a domain.]"
+    "network-detach[Destroy a domain's virtual network device.]"
+    "block-attach[Create a new virtual block device.]"
+    "block-list[List virtual block devices for a domain.]"
+    "block-detach[Destroy a domain's virtual block device.]"
+    "network2-attach[Create a new version 2 virtual network device.]"
+    "network2-list[List version 2 virtual network interfaces for a domain.]"
+    "network2-detach[Destroy a domain's version 2 virtual network device.]"
+)
+
+################################################################################
+# Listings
+
+# list domains
+_xl_get_domains() {
+    typeset -ga _xl_domain_list
+    local hline
+
+    _call_program xl xl list | tail -n +2 | while read -A hline; do
+        _xl_domain_list+=$hline[1]
+    done
+}
+_xl_domains() {
+    _xl_get_domains
+    _describe -t domains 'xl domains' _xl_domain_list
+}
+
+# list nics
+_xl_get_nics() {
+    typeset -ga _xl_nics_list
+    local hline
+
+    _call_program xl xl network-list $1 | tail -n +2 | while read -A hline; do
+        _xl_nics_list+=`echo $hline[3] | sed -e 's/\:/\\\\\\:/g'`
+    done
+}
+
+_xl_nics() {
+    _xl_get_nics $3
+    _describe -t nics 'xl nics' _xl_nics_list
+}
+
+# list block devices
+_xl_get_blocks() {
+    typeset -ga _xl_blocks_list
+    local hline
+
+    _call_program xl xl block-list $1 | tail -n +2 | while read -A hline; do
+        _xl_blocks_list+=$hline[0]
+    done
+}
+
+_xl_blocks() {
+    _xl_get_blocks $3
+    _describe -t nics 'xl blocks' _xl_blocks_list
+}
+
+# list net2 devices
+_xl_get_net2s() {
+    typeset -ga _xl_net2_list
+    local hline
+
+    _call_program xl xl block-list $1 | tail -n +2 | while read -A hline; do
+        _xl_net2_list+=$hline[0]
+    done
+}
+
+_xl_net2s() {
+    _xl_get_net2s $3
+    _describe -t nics 'xl net2s' _xl_net2_list
+}
+
+################################################################################
+# commands completion
+
+# handle list command
+_xl_list() {
+    _arguments -s -w : '*:xl domains:_xl_domains'
+}
+
+# handle create command
+_xl_create() {
+    _arguments -s -w : \
+        '-h[Print help]' \
+        '-d[Enable debug messages]' \
+        '-e[Do not wait in the background for the death of the domain]' \
+        '2:xl files:_files'
+}
+
+# handle destroy command
+_xl_destroy() {
+    _arguments -s -w : '2:xl domains:_xl_domains'
+}
+
+# handle pci-list
+_xl_pci-list() {
+    _arguments -s -w : '2:xl domains:_xl_domains'
+}
+
+# handle pci-attach
+_xl_pci-attach() {
+    _arguments -s -w : '2:xl domains:_xl_domains'
+}
+
+# handle pci-detach
+_xl_pci-detach() {
+    _arguments -s -w : '2:xl domains:_xl_domains'
+}
+
+# handle pause
+_xl_pause() {
+    _arguments -s -w : '2:xl domains:_xl_domains'
+}
+
+# handle unpause
+_xl_unpause() {
+    _arguments -s -w : '2:xl domains:_xl_domains'
+}
+
+# handle console
+_xl_console() {
+    _arguments -s -w : '2:xl domains:_xl_domains'
+}
+
+# handle save
+_xl_save() {
+    _arguments -s -w : \
+        '-h[Print help]' \
+        '-c[Leave domain running after creating the snapshot.]' \
+        '2:xl domains:_xl_domains'
+}
+
+# handle restore
+_xl_restore() {
+    _arguments -s -w : \
+        '-h[Print help]' \
+        '-p[Do not unpause domain after restoring it.]' \
+        '-e[Do not wait in the background for the death of the domain.]' \
+        '2:xl domains:_xl_domains'
+}
+
+# handle cd-insert
+_xl_cd-insert() {
+    _arguments -s -w : \
+        '2:xl domains:_xl_domains'
+}
+
+# handle cd-eject
+_xl_cd-eject() {
+    _arguments -s -w : \
+        '2:xl domains:_xl_domains'
+}
+
+# handle button-press
+_xl_button-press() {
+    typeset -a _xl_buttons
+    _xl_buttons=('sleep' 'power')
+    _arguments -s -w : \
+        '2:xl domains:_xl_domains' \
+        '3:button:(sleep power)'
+}
+
+# handle vcpu-list command
+_xl_vcpu-list() {
+    _arguments -s -w : '*:xl domains:_xl_domains'
+}
+
+# handle vcpu-pin command
+_xl_vcpu-pin() {
+    _arguments -s -w : '2:xl domains:_xl_domains' \
+        '3:vcpus:(all)' \
+        '4:cpus:(all)'
+}
+
+# handle vcpu-set command
+_xl_vcpu-set() {
+    _arguments -s -w : '2:xl domains:_xl_domains'
+}
+
+# handle network-attach command
+_xl_network-attach() {
+    _arguments -s -w : '2:xl domains:_xl_domains' \
+        '*:network-attach args:(type= mac= bridge= ip= script= backend= vifname= model= rate= accel=)'
+}
+
+# handle network-list command
+_xl_network-list() {
+    _arguments -s -w : '*:xl domains:_xl_domains'
+}
+
+# handle network-detach command
+_xl_network-detach() {
+    _arguments -s -w : '2:xl domains:_xl_domains' \
+        '3:xl nics:_xl_nics $words[3]'
+}
+
+# handle block-attach command
+_xl_block-attach() {
+    _arguments -s -w : '2:xl domains:_xl_domains' \
+        '5:xl parameters:(r w)' \
+        '6:xl domains:_xl_domains'
+}
+
+# handle block-list command
+_xl_block-list() {
+    _arguments -s -w : '*:xl domains:_xl_domains'
+}
+
+# handle block-detach command
+_xl_block-detach() {
+    _arguments -s -w : '2:xl domains:_xl_domains' \
+        '3:xl block:_xl_blocks $words[3]'
+}
+
+# handle network2-attach command
+_xl_network2-attach() {
+    _arguments -s -w : '2:xl domains:_xl_domains' \
+        '*:xl paramteters:(front_mac= back_mac= backend= trusted= back_trusted= bridge= filter_mac= front_filter_mac= pdev= max_bypasses=)'
+}
+
+# handle network2-list command
+_xl_network2-list() {
+    _arguments -s -w : '*:xl domains:_xl_domains'
+}
+
+# handle network2-detach command
+_xl_network2-detach() {
+    _arguments -s -w : '2:xl domains:_xl_domains' \
+        '3:xl net2s:_xl_net2s'
+}
+
+# main dispatcher
+_xl() {
+    if (( $+functions[_xl_$words[2]] )); then
+        # dispatch to command completion function
+        _xl_$words[2]
+    else
+        if (( CURRENT == 2 )); then
+            _values 'xl commands' $_xl_commands
+        else
+            _files
+        fi
+    fi
+}
+
+# run the main dispatcher
+_xl "$@"
