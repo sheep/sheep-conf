@@ -24,6 +24,8 @@ wmii.tagrules = (
 )
 
 wmii.colrules = (
+    # With xchat/pidgin
+    ('chat', '75+25'),
     ('.*', '50+50'),
 )
 
