@@ -28,6 +28,8 @@ alias mv="mv -i"
 alias df="df -h"
 alias du="du -h"
 
+alias bc='bc -l'
+
 alias screen="screen -aRAdU"
 alias diff='diff -u'
 # FIXME: Use egrep, if exist.
@@ -57,5 +59,8 @@ todo() {
 }
 
 # global alias
-alias -g L='|less'
+alias -g L='|less -r'
+alias -g La='2>&1|less -r'
 alias -g G='|egrep'
+alias -g T='|tail'
+alias -g H='|head'
