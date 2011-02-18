@@ -318,14 +318,6 @@ zstyle ':completion:*' menu select=2
 [ -d $ZSHDIR/cache ] && zstyle ':completion:*' use-cache yes && \
                         zstyle ':completion::complete:*' cache-path $ZSHDIR/cache/
 
-# use ~/.ssh/known_hosts for completion
-#  local _myhosts
-#  _myhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
-#  zstyle ':completion:*' hosts $_myhosts
-known_hosts=''
-#[ -f "$HOME/.ssh/known_hosts" ] && \
-#known_hosts="`awk '$1!~/\|/{print $1}' $HOME/.ssh/known_hosts | cut -f1 -d, | xargs`"
-#
 #lrde_hosts=''
 # Do we have `host' installed?
 # if which host >/dev/null 2>/dev/null; then
@@ -342,9 +334,10 @@ known_hosts=''
 #     fi
 # fi
 #
-#zstyle ':completion:*:hosts' hosts ${=lrde_hosts} ${=known_hosts}
-my_hosts=`cat ~/.zsh/myhosts`
-zstyle ':completion:*:hosts' hosts ${=my_hosts} ${=known_hosts}
+if test -r "$ZSHDIR/myhosts"; then
+  my_hosts=`cat "$ZSHDIR/myhosts"`
+  zstyle ':completion:*:hosts' hosts ${=my_hosts}
+fi
 
 # simple completion for fbset (switch resolution on console)
 _fbmodes() { compadd 640x480-60 640x480-72 640x480-75 640x480-90 640x480-100 768x576-75 800x600-48-lace 800x600-56 800x600-60 800x600-70 800x600-72 800x600-75 800x600-90 800x600-100 1024x768-43-lace 1024x768-60 1024x768-70 1024x768-72 1024x768-75 1024x768-90 1024x768-100 1152x864-43-lace 1152x864-47-lace 1152x864-60 1152x864-70 1152x864-75 1152x864-80 1280x960-75-8 1280x960-75 1280x960-75-32 1280x1024-43-lace 1280x1024-47-lace 1280x1024-60 1280x1024-70 1280x1024-74 1280x1024-75 1600x1200-60 1600x1200-66 1600x1200-76 }
