@@ -47,7 +47,7 @@ def cpu_stat_next():
           stat_vals['idle'][i]   - old_stats['idle'][i]   + \
           stat_vals['iowait'][i] - old_stats['iowait'][i]
       total.append( \
-        '%02d%%' % (100 - ((stat_vals['idle'][i] - old_stats['idle'][i]) * 100 / dtotal)))
+        '%02d%%' % (99 - ((stat_vals['idle'][i] - old_stats['idle'][i]) * 99 / dtotal)))
     old_stats.update(stat_vals)
     return ','.join(total)
   except Exception, e:
