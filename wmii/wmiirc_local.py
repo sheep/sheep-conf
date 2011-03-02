@@ -49,6 +49,21 @@ keys.bind('main', (
     ('%(mod)s-Shift-comma', "Move to the view to the right, take along current client",
         lambda k: Tags().select(Tags().next(True), take_client=Client('sel'))),
 
+    "Select specific tag",
+    ('%(mod)s-equal', "Move to view 'web'",
+        lambda k: Tags().select("web")),
+    ('%(mod)s-minus', "Move to view 'chat'",
+        lambda k: Tags().select("chat")),
+
+    "Moving around",
+    ('%(mod)s-Left',  "Select the client to the left",
+        lambda k: Tag('sel').select('left')),
+    ('%(mod)s-Right', "Select the client to the right",
+        lambda k: Tag('sel').select('right')),
+    ('%(mod)s-Up',    "Select the client above",
+        lambda k: Tag('sel').select('up')),
+    ('%(mod)s-Down',  "Select the client below",
+        lambda k: Tag('sel').select('down')),
 ))
 
 trayer = 'trayer', '--expand', 'true', '--widthtype', 'request', \
