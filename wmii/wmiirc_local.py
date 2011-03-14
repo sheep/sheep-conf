@@ -3,6 +3,7 @@ import time
 
 import pygmi
 from pygmi import *
+from wmiirc import tags
 
 # Theme
 background = '#363946'
@@ -41,19 +42,19 @@ keys.bind('main', (
 
     "Tag actions 2",
     ('%(mod)s-period', "Move to the view to the left",
-        lambda k: Tags().select(Tags().next())),
+        lambda k: tags.select(tags.next())),
     ('%(mod)s-comma', "Move to the view to the right",
-        lambda k: Tags().select(Tags().next(True))),
+        lambda k: tags.select(tags.next(True))),
     ('%(mod)s-Shift-period', "Move to the view to the left, take along current client",
-        lambda k: Tags().select(Tags().next(), take_client=Client('sel'))),
+        lambda k: tags.select(tags.next(), take_client=Client('sel'))),
     ('%(mod)s-Shift-comma', "Move to the view to the right, take along current client",
-        lambda k: Tags().select(Tags().next(True), take_client=Client('sel'))),
+        lambda k: tags.select(tags.next(True), take_client=Client('sel'))),
 
     "Select specific tag",
     ('%(mod)s-equal', "Move to view 'web'",
-        lambda k: Tags().select("web")),
+        lambda k: tags.select("web")),
     ('%(mod)s-minus', "Move to view 'chat'",
-        lambda k: Tags().select("chat")),
+        lambda k: tags.select("chat")),
 
     "Moving around",
     ('%(mod)s-Left',  "Select the client to the left",
