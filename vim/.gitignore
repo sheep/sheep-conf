@@ -1,5 +1,6 @@
 colors/*.vim
 plugin/color_sample_pack.vim
 tmp/*.swp
+tmp/*.swo
 /.netrwhist
 colors/ColorSamplerPack.zip
