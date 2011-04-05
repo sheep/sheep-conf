@@ -14,7 +14,7 @@ setopt auto_param_slash         # Add slashes at the end of auto completed dir n
 setopt complete_aliases
 setopt equals                   # If a word begins with an unquoted `=', the remainder of the word is taken as the name of a command.
                                 # If a command exists by that name, the word is replaced by the full pathname of the command.
-setopt extended_glob            # activates: ^x         Matches anything except the pattern x.
+#setopt extended_glob            # activates: ^x         Matches anything except the pattern x.
                                 #            x~y        Match anything that matches the pattern x but does not match y.
                                 #            x#         Matches zero or more occurrences of the pattern x.
                                 #            x##        Matches one or more occurrences of the pattern x.
