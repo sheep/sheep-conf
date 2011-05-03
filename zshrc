@@ -81,7 +81,10 @@ export MAKE=make
 
 ZSHDIR="$HOME/.zsh"
 
-compile_source ~/.zsh/env_var
+compile_source $ZSHDIR/env_var
+if [ -r "$ZSHDIR/env_var_local" ]; then
+  compile_source "$ZSHDIR/env_var_local"
+fi
 
 #########
 # Alias #
