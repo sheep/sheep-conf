@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 # Add this in your .$(SHELL)rc, you have choice between an alias or a function
 #
