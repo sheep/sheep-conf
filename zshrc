@@ -57,7 +57,6 @@ export NAME='Anthony PERARD'
 export FULLNAME='Anthony PERARD'
 export EMAIL='anthony.perard@gmail.com'
 export REPLYTO='anthony.perard@gmail.com'
-export SHELL='zsh'
 
 test -d $HOME/bin && export PATH="$HOME/bin:$PATH"
 test -d /usr/local/bin && export PATH="$PATH:/usr/local/bin"
