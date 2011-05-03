@@ -65,6 +65,16 @@ keys.bind('main', (
         lambda k: Tag('sel').select('up')),
     ('%(mod)s-Down',  "Select the client below",
         lambda k: Tag('sel').select('down')),
+
+    "Moving clients around",
+    ('%(mod)s-Shift-Left',  "Move selected client to the left",
+        lambda k: Tag('sel').send(Client('sel'), 'left')),
+    ('%(mod)s-Shift-Right', "Move selected client to the right",
+        lambda k: Tag('sel').send(Client('sel'), 'right')),
+    ('%(mod)s-Shift-Up',    "Move selected client up",
+        lambda k: Tag('sel').send(Client('sel'), 'up')),
+    ('%(mod)s-Shift-Down',  "Move selected client down",
+        lambda k: Tag('sel').send(Client('sel'), 'down')),
 ))
 
 trayer = 'trayer', '--expand', 'true', '--widthtype', 'request', \
