@@ -1,21 +1,11 @@
-import re
 import os
 
 if __name__ != "__main__":
   import pygmi
   from pygmi import *
-else:
-  import sys
-  sys.path.append("..")
-
-from utils import parse_file
-
-path_load = '/proc/loadavg'
-re_load = re.compile(r'^(?P<load>([0-9.]+ ){2}[0-9.]+)')
 
 def get_load():
-  a = parse_file(path_load, re_load)
-  return a['load'][0]
+  return "%.2f %.2f %.2f" % os.getloadavg()
 
 def update(self):
   return wmii.cache['normcolors'], get_load()
