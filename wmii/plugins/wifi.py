@@ -1,5 +1,6 @@
 import pygmi
 from pygmi import *
+from utils import colors
 
 # TODO check if exist:
 import wpactrl
@@ -29,6 +30,7 @@ def update(self):
   global wpa
 
   try:
+    color = colors.redcolors
     if not wpa:
       wpa = wpactrl.WPACtrl(interface)
     # check: wpa.request('PING') => 'PONG\n'
@@ -41,11 +43,11 @@ def update(self):
         ip = res_ip[0]
       if len(ip) > 6:
         state = "OK"
-        # make "wifi" in green :)
+        color = wmii.cache['normcolors']
       else:
         state = "no IP"
 
-    return wmii.cache['normcolors'], 'wifi: %s' % state
+    return color, 'wifi: %s' % state
 
   except wpactrl.error, error:
     #print 'Error: ', error
