@@ -55,9 +55,6 @@ terminal = 'wmiir', 'setsid', 'xterm'
 pygmi.shell = os.environ.get('SHELL', 'sh')
 
 @defmonitor
-def load(self):
-    return wmii.cache['normcolors'], re.sub(r'^.*: ', '', call('uptime')).replace(', ', ' ')
-@defmonitor
 def time(self):
     return wmii.cache['focuscolors'], datetime.datetime.now().strftime('%c')
 
