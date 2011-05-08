@@ -2,6 +2,7 @@ import re
 
 import pygmi
 from pygmi import *
+from utils import colors
 
 monitor = None
 mixer = 'Master'
@@ -39,7 +40,7 @@ def update(self):
     get()
     color = wmii.cache['normcolors']
     if mute != 0:
-      color = ('#ff2030', color[1], color[2])
+      color = colors.redcolors
     return color, "vol: %s%%" % vol
 
 monitor = defmonitor(update, name='4_volume', interval=60)
