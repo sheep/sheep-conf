@@ -41,7 +41,7 @@ def update(self):
     color = wmii.cache['normcolors']
     if mute != 0:
       color = colors.redcolors
-    return color, "vol: %s%%" % vol
+    return color, u"\u266A %s%%" % vol
 
 monitor = defmonitor(update, name='4_volume', interval=60)
 
