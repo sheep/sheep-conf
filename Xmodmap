@@ -1,6 +1,6 @@
 clear mod3
 clear mod4
-keycode 10 = 1 exclam eacute
+keycode  10 = 1 exclam eacute
 keycode  11 = 2 at egrave
 keycode  12 = 3 numbersign ecircumflex
 keycode  13 = 4 dollar icircumflex
