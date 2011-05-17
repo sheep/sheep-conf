@@ -35,16 +35,10 @@ noticebar=('right', '!notice')
 background = '#333333'
 floatbackground='#222222'
 
-wmii['font'] = 'drift,-*-fixed-*-*-*-*-9-*-*-*-*-*-*-*'
-wmii['normcolors'] = '#000000', '#c1c48b', '#81654f'
-wmii['focuscolors'] = '#000000', '#81654f', '#000000'
-wmii['grabmod'] = keys.defs['mod']
-wmii['border'] = 2
-
-# Sheep color
 wmii['font'] = 'drift,-*-fixed-*-*-*-*-13-*-*-*-*-*-*-*'
 wmii['normcolors'] = '#e0e0e0', '#202020', '#202438'
 wmii['focuscolors'] = '#cae682', '#505860', '#303840'
+wmii['grabmod'] = keys.defs['mod']
 wmii['border'] = 5
 
 def setbackground(color):
