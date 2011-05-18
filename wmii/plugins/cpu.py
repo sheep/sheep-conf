@@ -49,8 +49,8 @@ def cpu_stat_next():
       if dtotal == 0:
         total.append("00%")
       else:
-        total.append( \
-          '%02d%%' % (99 - ((stat_vals['idle'][i] - old_stats['idle'][i]) * 99 / dtotal)))
+        idle = stat_vals['idle'][i] + stat_vals['iowait'][i] - old_stats['idle'][i] - old_stats['iowait'][i]
+        total.append('%02d%%' % (99 - (idle * 99 / dtotal)))
     old_stats.update(stat_vals)
     return ','.join(total)
   except Exception, e:
