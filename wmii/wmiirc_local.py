@@ -5,15 +5,6 @@ import pygmi
 from pygmi import *
 from wmiirc import tags
 
-# Theme
-background = '#363946'
-
-wmii['font'] = 'drift,-*-fixed-*-*-*-*-13-*-*-*-*-*-*-*'
-wmii['normcolors'] = '#e0e0e0', '#202020', '#202438'
-wmii['focuscolors'] = '#cae682', '#505860', '#303840'
-
-wmii['border'] = 5
-
 wmii.tagrules = (
     ('Firefox|Shiretoko|Namoroka', 'web'),
     ('Google Chrome|Chromium', 'web'),
