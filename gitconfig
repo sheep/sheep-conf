@@ -62,6 +62,12 @@
         svnup=!git svn fetch && git svn rebase
         rewrite=!"d=`git rev-parse --git-dir`; git diff-index --quiet HEAD || { echo dirty index 2>&1; exit 1; }; f() { echo $1 >$d/rewrite; git branch | sed '/^[*] /!d;s///' >>$d/rewrite; test x"$1" = x && rm -f $d/rewrite && echo 'usage: rewrite <sha1>' || :; git checkout $1; }; f"
         rwdone=!"d=`git rev-parse --git-dir`; test -f $d/rewrite && git rebase --onto HEAD `cat $d/rewrite`"
+
+	# Alias for git rebase -i
+	fixup = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
+	squash = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
+	ri = rebase --interactive --autosquash
+
 [core]
 	legacyheaders = false
 	excludesfile = ~/.gitignore
