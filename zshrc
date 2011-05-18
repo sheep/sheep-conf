@@ -357,3 +357,17 @@ compdef _gnu_generic tail head feh cp mv gpg df stow uname ipacsum fetchipac
 
 # see upgrade function in this file
 compdef _hosts upgrade
+
+# Load ssh-agent var or run it if needed
+ssh-add -l >/dev/null 2>&1
+if test $? -eq 2; then
+  agent="$HOME/.ssh/ssh-agent.$(hostname)"
+  test -f "$agent" && source "$agent" >/dev/null
+  ssh-add -l >/dev/null 2>&1
+  if test $? -eq 2; then
+    touch $agent
+    chmod 600 $agent
+    command ssh-agent -t $((18 * 3600)) > $agent
+    source $agent >/dev/null
+  fi
+fi
