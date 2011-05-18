@@ -1,68 +1,22 @@
-# python-wmii mpd status plugin v.0.1
-#
-# Description:
-# ------------
-# Display the state of MPD in the wmii status bar.
-# Requires the mpdlib2 library, part of pympd.
-#
-# Install:
-# -------
-# Copy this file in ~/.wmii-3.5/statusbar/
-#
-# How I use it:
-# -------------
-# I have some global bindings set up to control MPD, via mpc,
-# using xbindkeys. (could use directly the wmii keybinding system
-# but I prefer to access these functions from any window manager.
-# This small plugin allows me to have some visual feedback by
-# showing the current playing song, if any.
-#
-# Can also be used as a stand-alone script:
-#	python 10_mpd.py | dzen2
-# (passes the output to dzen)
-#
-# Updates:
-# --------
-# 2007-11-28    simplify update() function, update songstr()
-#               to generate better output, add logger, add to
-#               python-wmii mercurial repository
-#
-# ------------------------------------------------------------
-#
-# This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-#
-# Copyright (C) 2007 Brescan Florin ( ratzunu at gmail ... )
-#
-# Hacked by Anthony PERARD
-# update to use with wmii-3.9.2
+# Check this:
+# http://jatreuman.indefero.net/p/python-mpd/page/ExampleErrorhandling/
 
-# vim:syntax=python:sw=4:ts=4:expandtab
+from threading import Thread
+from select import select
+from os import pipe, fdopen
+from time import sleep
 
-import pygmi
-from pygmi import *
+if __name__ != "__main__":
+    import pygmi
+    from pygmi import *
 
-has_pympd = False
-try:
-    import mpdlib2
-    has_pympd = True
-except:
-    pass
+from pympd import mpd
 
 SONG_MAX = 60
-mpd = None
+mpc = None
 monitor = None
+cmd_in = None
+cmd_out = None
 
 def songstr(song):
     s = ''
@@ -78,75 +32,116 @@ def songstr(song):
     return s
 
 def update(self):
-    global mpd
+    global mpc
+
+    if not mpc:
+      return None
 
     try:
-        if not mpd:
-            mpd = mpdlib2.connect()
+        status = mpc.status()
+        song = ''
+        prefix = 'mpc: (%s)' % status['state']
+        if status['state'] in ('play', 'pause'):
+            song = ' %s' % songstr(mpc.currentsong())
+        if status['state'] == "stop":
+            prefix = u"\u25A0"
+        elif status['state'] == "play":
+            prefix = u"\u266D"
+        return wmii.cache['normcolors'], u'%s%s' % (prefix, song)
+    except UnicodeDecodeError, e:
+        return wmii.cache['normcolors'], u'%s' % prefix
 
-        status = mpd.status()
+def mpd_loop(monitor):
+    global mpc
+    global cmd_in
+    idle = False
+    updated = True
 
-        if status:
-            song = ''
-            if status.state in ('play', 'pause'):
-                song = ' %s' % songstr(mpd.currentsong())
-            elif status.state == "":
-                # an error make mpd.status to have "play", "", alternatively, and no song
-                # so make to try to cache this error.
-                mpd = None
-                return wmii.cache['normcolors'], "mpd: error"
-            return wmii.cache['normcolors'], 'mpd: (%s) %s' % (status.state, song)
-    except Exception, e:
-        mpd = None  # try to reconnect if connection is lost
+    while True:
+        try:
+            if not mpc:
+                mpc = mpd.MPDClient()
+                mpc.connect('localhost', 6600)
 
-    return None
+            if updated:
+                if monitor:
+                    monitor.refresh()
+                else:
+                    print "(%s) %s" % (mpc.status()['state'], songstr(mpc.currentsong()))
+                updated = False
 
-def pause():
-    global mpd
-    if mpd:
-        if mpd.status().state in ('pause', 'stop'):
-            mpd.play()
-        else:
-            mpd.pause(1)
-        monitor.refresh()
+            mpc.send_idle('player')
+            idle = True
+            (rfds, _, _) = select([mpc,cmd_in], [], [])
+            # check first if mpd have a new status!
+            if rfds.count(mpc) > 0:
+                rfds.pop(rfds.index(mpc))
+                mpc.fetch_idle()
+                idle = False
+                updated = True
+            # then run a command
+            if rfds.count(cmd_in) > 0:
+                fd = rfds.pop(rfds.index(cmd_in))
+                if idle:
+                    mpc.send_noidle()
+                    mpc.fetch_idle()
+                    idle = False
+                cmd = cmd_in.readline()
+                if cmd == 'play\n':
+                    if mpc.status()['state'] in ('pause', 'stop'):
+                        mpc.play()
+                    else:
+                        mpc.pause(1)
+                elif cmd == 'stop\n':
+                    mpc.stop()
+                elif cmd == 'next\n':
+                    mpc.next()
+                elif cmd == 'prev\n':
+                    mpc.previous()
+                else:
+                    print 'mpd: Unrecognised "%s" command.' % cmd
 
-def stop():
-    mpd.stop()
-    monitor.refresh()
+        except mpd.MPDError as e:
+            print "mpd: %s, reconnect..." % e
+            mpc.disconnect()
+            sleep(5)
+            mpc = None
+        except Exception as e:
+            print "mpd: %s %s, quit!" % (type(e), e)
+            break
 
-def next(n):
-    if n:
-        mpd.next()
-    else:
-        mpd.previous()
-    monitor.refresh()
+def send_command(cmd):
+    global cmd_out
+    cmd_out.write('%s\n' % cmd)
+    cmd_out.flush()
 
-if has_pympd:
-    monitor = defmonitor(update, name='1_mpd', interval=3.0)
+if __name__ != "__main__":
+    monitor = defmonitor(update, name='1_mpd', interval=-1)
 
     keys.bind('main', (
-      "Musique",
-      ('XF86AudioPlay', "Play/Pause",
-        lambda k: pause()),
-      ('XF86AudioStop', "Stop",
-        lambda k: stop()),
-      ('XF86AudioNext', "Next music",
-        lambda k: next(True)),
-      ('XF86AudioPrev', "Previous music",
-        lambda k: next(False)),
+        "Musique",
+        ('XF86AudioPlay', "Play/Pause",
+            lambda k: send_command('play')),
+        ('XF86AudioStop', "Stop",
+            lambda k: send_command('stop')),
+        ('XF86AudioNext', "Next music",
+            lambda k: send_command('next')),
+        ('XF86AudioPrev', "Previous music",
+            lambda k: send_command('prev')),
 
-      ('%(mod)s-Home', "Play/Pause",
-        lambda k: pause()),
-      ('%(mod)s-End', "Stop",
-        lambda k: stop()),
-      ('%(mod)s-Next', "Next music",
-        lambda k: next(True)),
-      ('%(mod)s-Prior', "Previous music",
-        lambda k: next(False)),
-    ))
+        ('%(mod)s-Home', "Play/Pause",
+            lambda k: send_command('play')),
+        ('%(mod)s-End', "Stop",
+            lambda k: send_command('stop')),
+        ('%(mod)s-Next', "Next music",
+            lambda k: send_command('next')),
+        ('%(mod)s-Prior', "Previous music",
+            lambda k: send_command('prev')),
+        ))
 
-#${mod}-Prior: play_previous_song
-#${mod}-Next: play_next_song
-#${mod}-Return: pause_current_song_toggle
-#${mod}-Home: load_playlist_from_menu
-#${mod}-End: add_current_song_to_playlist_from_menu
+(cmd_in,cmd_out) = pipe()
+cmd_in = fdopen(cmd_in, 'r', 5)
+cmd_out = fdopen(cmd_out, 'w', 5)
+Thread(target=mpd_loop, args=(monitor,)).start()
+
+# vim:sw=4 ts=4 expandtab
