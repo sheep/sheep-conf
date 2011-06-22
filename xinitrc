@@ -15,11 +15,11 @@ fi
 # Load french charactere with 'Alt Gr'
 test -f .Xmodmap && xmodmap .Xmodmap
 
-xscreensaver -no-splash &
-
 # Set timeout for Energy Star (DPMS) of screen
-xset dpms 120
+xset dpms 300
 xset +dpms
+
+xscreensaver -no-splash &
 
 export PYTHONOPTIMIZE=2
 
