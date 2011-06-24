@@ -113,6 +113,10 @@ set cinoptions=(0,:0,l1,t0     " Options for the C indentation (qemu, linux)
 set scrolloff=2     " to have always 2 line before/after the cursor
                     " in top/bottom of the screen
 
+" BufExplorer options
+let g:bufExplorerSplitOutPathName = 0      " Split out path and file name?
+let g:bufExplorerShowRelativePath = 1      " Show listings with relative or absolute paths?
+
 " Command line
 " Suffixes file to ignore on completion.
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
