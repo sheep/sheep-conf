@@ -75,7 +75,7 @@ set cinoptions=(0,:0,l1,t0     " Options for the C indentation (qemu, linux)
 "help tabstop         " Find out more about this stuff.
 "help vimrc           " Find out more about .vimrc/_vimrc :-)
 
-" Folding {
+" Folding {{{
   set foldenable                  " Turn on folding
   set foldmethod=marker           " Fold on the marker
   set foldlevel=1                 " Don't autofold anything (but I can still
@@ -108,7 +108,7 @@ set cinoptions=(0,:0,l1,t0     " Options for the C indentation (qemu, linux)
       endif
       return -1
   endfunction
-" }
+" }}}
 
 set scrolloff=2     " to have always 2 line before/after the cursor
                     " in top/bottom of the screen
