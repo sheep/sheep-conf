@@ -25,6 +25,8 @@ alias -- -="cd -"
 alias cp="cp -i"
 alias mv="mv -i"
 
+alias crontab='crontab -i'
+
 alias df="df -h"
 alias du="du -h"
 
