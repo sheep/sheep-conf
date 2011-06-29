@@ -12,7 +12,8 @@
 
 agent=~/.ssh/ssh-agent.$(hostname)
 
-life=$((6 * 3600))
+default_life=$((6 * 3600))
+life=0
 
 if test $# -gt 0; then
     if test "$1" = '-t'; then
@@ -28,9 +29,14 @@ fi
 
 newAgent ()
 {
-    echo "new agent on $(hostname) of $((life / 3600)) hours"
-    ssh-agent -t $life > $agent
-    source $agent > /dev/null
+  if test $life -eq 0; then
+    agent_life=$default_life
+  else
+    agent_life=$life
+  fi
+  echo "new agent on $(hostname) of $((agent_life / 3600)) hours"
+  ssh-agent -t $agent_life > $agent
+  source $agent > /dev/null
 }
 
 if test -e $agent; then
@@ -48,5 +54,9 @@ fi
 
 # Add private key.
 if ! (ssh-add -l 2>/dev/null | grep -q id_rsa); then
-    ssh-add -t $life ~/.ssh/id_rsa
+  opt=""
+  if [ $life -ne 0 ]; then
+    opt="-t $life"
+  fi
+  ssh-add $opt ~/.ssh/id_rsa
 fi
