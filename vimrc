@@ -156,12 +156,12 @@ map <F8> :cwindow<CR>
 " buffer stuffs
 map <C-N> :bn<CR>
 map <C-P> :bp<CR>
-map <space>l :bn<CR>
-map <space>h :bp<CR>
+map <space>j :bn<CR>
+map <space>k :bp<CR>
 map <space>o :BufExplorer<CR>
 map <space>t :tabnew<CR>
-map <space>k :tabn<CR>
-map <space>j :tabp<CR>
+map <space>l :tabn<CR>
+map <space>h :tabp<CR>
 
 " move over folds
 " move upwards to the start of the previous fold.
