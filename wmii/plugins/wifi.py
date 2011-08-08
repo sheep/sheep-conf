@@ -2,8 +2,13 @@ import pygmi
 from pygmi import *
 from utils import colors
 
-# TODO check if exist:
-import wpactrl
+has_wpactrl = False
+try:
+    import wpactrl
+    has_wpactrl = True
+except:
+    pass
+
 import os
 import re
 
@@ -55,4 +60,5 @@ def update(self):
 
   return None
 
-monitor = defmonitor(update, name='5_wifi', interval=10)
+if has_wpactrl:
+  monitor = defmonitor(update, name='5_wifi', interval=10)
