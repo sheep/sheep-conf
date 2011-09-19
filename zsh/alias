@@ -48,7 +48,7 @@ else
     alias make='make --no-print-directory'
 fi
 
-alias m=make
+alias m="ionice nice make -j$(([#10] $(egrep -c '^processor' /proc/cpuinfo) * 1.5))"
 # TODO try to have color and a less like beahvior (maybe vim like)
 #alias man='PAGER=most man'
 which svn-wrapper.sh >/dev/null && alias svn='svn-wrapper.sh'
