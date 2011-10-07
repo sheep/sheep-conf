@@ -95,8 +95,9 @@ class Monitor(object):
             self.timer.start()
 
     def refresh(self):
-        self.timer.cancel()
-        self.timer = None
+        if self.timer:
+            self.timer.cancel()
+            self.timer = None
         self.tick()
 
     def getlabel(self):
