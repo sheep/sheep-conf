@@ -31,10 +31,11 @@ def get_mem_stat():
     swap_usage = 0
   else:
     swap_usage = 100 - (mem['swap_free'] / mem['swap_total'] * 100.0)
+    swap_used = (mem['swap_total'] - mem['swap_free']) / 2 ** 20
 
   s = 'ram: %.2fG (%02d%%)' % (mem_used / 2 ** 20, mem_usage)
   if swap_usage > 0:
-    s += ' swap: %02d%%' % (swap_usage)
+    s += ' swap: %.1fG (%02d%%)' % (swap_used, swap_usage)
   return s
 
 def update(self):
