@@ -68,10 +68,11 @@ keys.bind('main', (
         lambda k: Tag('sel').send(Client('sel'), 'down')),
 ))
 
-trayer = 'trayer', '--expand', 'true', '--widthtype', 'request', \
-    '--height', '5', '--transparent', 'true', '--alpha', '255', \
-    '--edge', 'bottom', '--align', 'right'
-call(*trayer, background=True, preexec_fn=time.sleep(1))
+if not call('pidof', 'trayer'):
+    trayer = 'trayer', '--expand', 'true', '--widthtype', 'request', \
+        '--height', '5', '--transparent', 'true', '--alpha', '255', \
+        '--edge', 'bottom', '--align', 'right'
+    call(*trayer, background=True, preexec_fn=time.sleep(1))
 
 print "Configuration loaded"
 
