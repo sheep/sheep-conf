@@ -38,6 +38,7 @@ alias diff='diff -u'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias gnus='emacs -f gnus'
+alias rsync='rsync --human-readable --progress --times --compress'
 
 alias touchold='touch -t 01010000'
 alias today='date +%Y-%m-%d'
@@ -49,8 +50,10 @@ else
 fi
 
 alias m="ionice nice make -j$(([#10] $(egrep -c '^processor' /proc/cpuinfo) * 1.5))"
+
 # TODO try to have color and a less like beahvior (maybe vim like)
 #alias man='PAGER=most man'
+
 which svn-wrapper.sh >/dev/null && alias svn='svn-wrapper.sh'
 
 alias ssh-agent='ssh-agent -t 2700'
