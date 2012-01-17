@@ -11,8 +11,12 @@ def _():
 def call(*args, **kwargs):
     background = kwargs.pop('background', False)
     input = kwargs.pop('input', None)
-    p = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                         stderr=subprocess.PIPE, cwd=os.environ['HOME'],
+    stdfd_type = subprocess.PIPE
+    if background:
+        # With this, the subprocess will inherited the stdfd form the parent
+        stdfd_type = None
+    p = subprocess.Popen(args, stdin=stdfd_type, stdout=stdfd_type,
+                         stderr=stdfd_type, cwd=os.environ['HOME'],
                          close_fds=True, **kwargs)
     if not background:
         return p.communicate(input)[0].rstrip('\n')
