@@ -58,8 +58,17 @@ export FULLNAME='Anthony PERARD'
 export EMAIL='anthony.perard@gmail.com'
 export REPLYTO='anthony.perard@gmail.com'
 
-test -d $HOME/bin && export PATH="$HOME/bin:$PATH"
-test -d /usr/local/bin && export PATH="$PATH:/usr/local/bin"
+for dir in ~/bin /usr/local/bin; do
+  test -d "$dir" || continue
+  if [[ -z ${path[(r)$dir]} ]]; then
+    path=($dir $path)
+  fi
+done
+for dir in /usr/sbin /sbin; do
+  if [[ -z ${path[(r)$dir]} ]]; then
+    path=($path $dir)
+  fi
+done
 
 export EDITOR='vim'
 export HGEDITOR='~/.myconf/hgeditor'
