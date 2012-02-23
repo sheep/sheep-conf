@@ -23,9 +23,9 @@ setopt hash_dirs                # Whenever a command name is hashed, hash the di
 setopt append_history           # append history list to the history file (important for multiple parallel zsh sessions!)
 setopt sh_word_split            # Do not quote expanded vars. Fait que zsh se comporte comme sh avec les variables
 #setopt mail_warning            # Print a warning message if a mail file has been accessed since the shell last checked.
-set nomatch                     # If no match in filename generation, print an error.
-
+setopt nomatch                  # If no match in filename generation, print an error.
 unsetopt beep
+unsetopt bg_nice
 
 bindkey -e
 
