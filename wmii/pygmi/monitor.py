@@ -90,9 +90,10 @@ class Monitor(object):
             else:
                 self.button.create(*label)
 
-            self.timer = Timer(self.interval, self.tick)
-            self.timer.daemon = True
-            self.timer.start()
+            if self.interval > 0:
+                self.timer = Timer(self.interval, self.tick)
+                self.timer.daemon = True
+                self.timer.start()
 
     def refresh(self):
         if self.timer:
