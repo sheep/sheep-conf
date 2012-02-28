@@ -169,9 +169,11 @@ RPROMPT="${prompt_rv}${prompt_time}"
 chpwd() {
     [[ -t 1 ]] || return
     case $TERM in
-      sun-cmd) print -Pn "\e]lzsh: %n@%m %~\e\\"
+      sun-cmd) print -Pn "\e]l%n@%m %~\e\\"
         ;;
-      *xterm*|rxvt|(k|E|dt)term) print -Pn "\e]0;zsh: %n@%m %~\a"
+      *xterm*|rxvt|(k|E|dt)term) print -Pn "\e]0;%n@%m %~\a"
+        ;;
+      rxvt-unicode) print -Pn "\e]2;%n@%m %~\a"
         ;;
     esac
 }
