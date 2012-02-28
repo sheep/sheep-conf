@@ -31,16 +31,6 @@ compile_source() {
 #	eval `dircolors -b /etc/DIR_COLORS`
 #fi
 
-# Change the window title of X terminals
-case $TERM in
-	xterm*|rxvt*|Eterm)
-		PROMPT_COMMAND='echo -ne "\033]0;zsh: ${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\007"'
-		;;
-	screen)
-		PROMPT_COMMAND='echo -ne "\033_zsh: ${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\033\\"'
-		;;
-esac
-
 
 #######
 # ENV #
