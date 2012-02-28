@@ -13,7 +13,7 @@ fi
 test -f .Xdefaults && xrdb .Xdefaults
 
 # Add a ssh-agent
-if which gnome-keyring-daemon; then
+if which gnome-keyring-daemon >/dev/null; then
   eval `gnome-keyring-daemon -c ssh -s`
   export SSH_AUTH_SOCK
 fi
