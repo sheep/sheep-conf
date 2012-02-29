@@ -15,12 +15,6 @@
 	renames = yes
 
 [alias]
-	# Checkout -b
-	cob =!"f() { echo \"Checkout branch origin/$1\"; git checkout -b $1 origin/$1; }; f"
-	# Fetch/rebase
-	fr =!"f() { echo \"Fetch/rebase on origin/$1\"; git fetch && git rebase origin/$1; }; f"
-	# Automatic Fetch/rebase on current branch
-	fra = !"f() { mybranch=$(git branch --no-color | sed -ne '/^\\* */s///p'); git fr \"$mybranch\"; }; f"
 	# Submodule init
 	subi = submodule init
 	# Submodule update
@@ -53,15 +47,10 @@
         dws = diff -C --stat --ignore-all-space
         dswi = diff -C --stat --ignore-all-space --cached
         dsiw = diff -C --stat --ignore-all-space --cached
-        cat = cat-file
-        cfg = config
-        ls = ls-tree
         gcp = gc --prune
         gcpa = gc --prune --aggressive
         gr=!cd `git rev-parse --git-dir`/.. && git grep
         svnup=!git svn fetch && git svn rebase
-        rewrite=!"d=`git rev-parse --git-dir`; git diff-index --quiet HEAD || { echo dirty index 2>&1; exit 1; }; f() { echo $1 >$d/rewrite; git branch | sed '/^[*] /!d;s///' >>$d/rewrite; test x"$1" = x && rm -f $d/rewrite && echo 'usage: rewrite <sha1>' || :; git checkout $1; }; f"
-        rwdone=!"d=`git rev-parse --git-dir`; test -f $d/rewrite && git rebase --onto HEAD `cat $d/rewrite`"
 
 	# Alias for git rebase -i
 	fixup = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
