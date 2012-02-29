@@ -22,17 +22,17 @@ wmii.colrules = (
 )
 
 terminal = 'wmiir', 'setsid', 'urxvt'
-browser = 'firefox'
-chrome = 'chromium'
+browser = 'wmiir', 'setsid', 'firefox'
+chrome = 'wmiir', 'setsid', 'chromium'
 
 keys.bind('main', (
     "Running programs",
     ('%(mod)s-x', "Launch a terminal",
         lambda k: call(*terminal, background=True)),
     ('%(mod)s-F5', "Launch Firefox",
-        lambda k: call(browser, background=True)),
+        lambda k: call(*browser, background=True)),
     ('%(mod)s-F6', "Launch Google-Chrome",
-        lambda k: call(chrome, background=True)),
+        lambda k: call(*chrome, background=True)),
 
     "Tag actions 2",
     ('%(mod)s-period', "Move to the view to the left",
