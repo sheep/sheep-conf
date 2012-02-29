@@ -21,7 +21,7 @@ wmii.colrules = (
     ('.*', '50+50'),
 )
 
-terminal = 'wmiir', 'setsid', 'xterm'
+terminal = 'wmiir', 'setsid', 'urxvt'
 browser = 'firefox'
 
 keys.bind('main', (
