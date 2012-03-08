@@ -23,9 +23,9 @@ Emacs*ReverseVideo:             on
 URxvt.scrollBar: off
 URxvt.font: 9x15
 URxvt.saveLines: 40000
-URxvt.background: black
-URxvt.foreground: white
-URxvt.color4: blue2
+URxvt.background: gray10
+URxvt.foreground: gray90
+URxvt.color4: cornflower blue
 URxvt.color12: rgb:5c/5c/ff
 URxvt.scrollTtyKeypress: true
 URxvt.scrollTtyOutput: false
