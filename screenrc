@@ -21,7 +21,7 @@ defutf8 on
 #change the hardstatus settings to give an window list at the bottom of the
 #screen, with the time and date and with the current window highlighted
 hardstatus alwayslastline
-hardstatus string '%{=s gk}[ %{G}%H %{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b C}[ %m/%d %c ]%{W}'
+hardstatus string '%{= dg}[ %H ][%= %{= d}%?%-Lw%?%{+b r}(%{w}%n*%f %t%?(%u)%?%{R})%{= d}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b b}[ %m/%d %c ]%{= dd}'
 
 #screen -t Coding        1	zsh
 #screen -t gnus		2	emacs -f gnus
