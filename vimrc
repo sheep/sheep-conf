@@ -34,12 +34,12 @@ colorscheme candycode
 set guioptions=
 set noguipty
 set mousehide
-highlight Normal gui=NONE guibg=Black guifg=White
+highlight Normal cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guibg=Gray10 guifg=Gray90
 
 " Status line
 
 set statusline=[%n]\ %<%f\ %((%1*%M%*%R%Y)%)\ %=%-19(\Line\ [%4l/%4L]\ \Col\ [%02c%03V]%)\ %P
-highlight StatusLine term=reverse  cterm=bold ctermfg=white ctermbg=lightblue gui=bold guifg=white guibg=blue
+highlight StatusLine term=reverse  cterm=bold ctermfg=white ctermbg=darkblue gui=bold guifg=white guibg=blue
 set laststatus=2      " To always view statusline
 
 " Indent Part
@@ -99,6 +99,8 @@ set cinoptions=(0,:0,l1,t0     " Options for the C indentation (qemu, linux)
       endif
       return -1
   endfunction
+
+  hi Folded ctermbg=NONE guibg=NONE
 " }}}
 
 set scrolloff=2     " to have always 2 line before/after the cursor
