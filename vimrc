@@ -31,19 +31,10 @@ colorscheme candycode
 
 " GUI
 
-if has("gui_running")
-
-  colorscheme candycode
-
-  "set guioptions-=T     " Remove tool bar
-  set guioptions=       " Remove all
-  set noguipty
-  set mousehide 	" hide the mouse cursor when typing
-
-  " Change background only if in GUI (not in term)
-  highlight Normal gui=NONE guibg=Black guifg=White
-
-endif
+set guioptions=
+set noguipty
+set mousehide
+highlight Normal gui=NONE guibg=Black guifg=White
 
 " Status line
 
