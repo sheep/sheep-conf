@@ -35,7 +35,7 @@ def update(self):
     color = wmii.cache['normcolors']
     return color, "%s" % loaded
 
-monitor = defmonitor(update, name='s_keyboard', interval=0)
+monitor = defmonitor(update, name='s_keyboard', interval=-1)
 
 keys.bind('main', (
     "Keyboard",
