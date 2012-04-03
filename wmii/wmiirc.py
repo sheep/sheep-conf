@@ -37,7 +37,7 @@ noticebar=('right', '!notice')
 background = '#333333'
 floatbackground='#222222'
 
-wmii['font'] = 'drift,-*-fixed-*-*-*-*-13-*-*-*-*-*-*-*'
+wmii['font'] = 'xft:-*-*-medium-*-*--13-*-*-*-*-*-*-*'
 wmii['normcolors'] = '#e0e0e0', '#202020', '#202438'
 wmii['focuscolors'] = '#cae682', '#505860', '#303840'
 wmii['grabmod'] = keys.defs['mod']
