@@ -42,9 +42,9 @@ keys.bind('main', (
         lambda k: tags.select(tags.next(True), take_client=Client('sel'))),
 
     "Select specific tag",
-    ('%(mod)s-equal', "Move to view 'web'",
+    ('%(mod)s-%(web_tag)s', "Move to view 'web'",
         lambda k: tags.select("web")),
-    ('%(mod)s-minus', "Move to view 'chat'",
+    ('%(mod)s-%(chat_tag)s', "Move to view 'chat'",
         lambda k: tags.select("chat")),
 
     "Moving around",

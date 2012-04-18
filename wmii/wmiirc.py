@@ -25,7 +25,9 @@ keys.defs = dict(
     left='h',
     down='j',
     up='k',
-    right='l')
+    right='l',
+    chat_tag='minus',
+    web_tag='equal')
 
 # Bars
 noticetimeout=5
