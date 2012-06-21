@@ -61,3 +61,4 @@ apply vimperator/.vimperator .vimperator
 # TODO Must check the version of wmii
 apply wmii .wmii
 apply indent.pro .indent.pro
+apply bashrc .bashrc

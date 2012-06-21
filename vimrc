@@ -19,15 +19,19 @@ set ignorecase		" Do case insensitive matching
 set incsearch		" Incremental search
 set autowrite		" Automatically save before commands like :next and :make
 "set hidden             " Hide buffers when they are abandoned
+if has("mouse")
 set mouse=a             " Enable mouse usage (all modes) in terminals
+endif
 "set background=dark
 set ttyfast
 set splitright          " to have the new window on the right instead of the left, when vertical split
 
 " Colors Scheme
 
+if has("eval")
 colorscheme candycode
 "colorscheme fnaqevan
+endif
 
 " GUI
 
@@ -67,6 +71,7 @@ set cinoptions=(0,:0,l1,t0     " Options for the C indentation (qemu, linux)
 "help vimrc           " Find out more about .vimrc/_vimrc :-)
 
 " Folding {{{
+if has("folding")
   set foldenable                  " Turn on folding
   set foldmethod=marker           " Fold on the marker
   set foldlevel=1                 " Don't autofold anything (but I can still
@@ -101,14 +106,17 @@ set cinoptions=(0,:0,l1,t0     " Options for the C indentation (qemu, linux)
   endfunction
 
   hi Folded ctermbg=NONE guibg=NONE
+endif
 " }}}
 
 set scrolloff=2     " to have always 2 line before/after the cursor
                     " in top/bottom of the screen
 
 " BufExplorer options
+if has("expr")
 let g:bufExplorerSplitOutPathName = 0      " Split out path and file name?
 let g:bufExplorerShowRelativePath = 1      " Show listings with relative or absolute paths?
+endif
 
 " Command line
 " Suffixes file to ignore on completion.
@@ -136,7 +144,9 @@ if has("autocmd")
 endif
 
 " teak sh indent
+if has("expr")
 let g:sh_indent_case_labels=1
+endif
 
 " Key mapping
 
