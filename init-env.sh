@@ -39,7 +39,7 @@ apply vimrc .vimrc
 apply vim  .vim
 apply zshrc .zshrc
 apply zsh .zsh
-apply dot.screenrc .screenrc
+apply screenrc .screenrc
 apply ion3 .ion3
 apply Xdefaults .Xdefaults
 apply Xmodmap .Xmodmap
@@ -49,7 +49,7 @@ apply xinitrc .xinitrc
 
 # Setup colorgcc
 info "Setup of colorgcc"
-apply dot.colorgccrc .colorgccrc
+apply colorgccrc .colorgccrc
 bin_dir="$HOME/bin"
 mkdir -p "$bin_dir"
 $ln "$conf_dir/script/colorgcc" "$bin_dir/gcc"
@@ -61,3 +61,5 @@ apply vimperator/.vimperator .vimperator
 # TODO Must check the version of wmii
 apply wmii .wmii
 apply indent.pro .indent.pro
+apply bashrc .bashrc
+apply tmux.conf .tmux.conf
