@@ -46,6 +46,9 @@ def update(self):
 
 monitor = defmonitor(update, name='s_keyboard', interval=-1)
 
+# default keyboard: dvorak
+dvorak_programmer_keyboard()
+
 keys.bind('main', (
     "Keyboard",
     ('%(mod)s-F1', "Load US+ layout",
