@@ -29,6 +29,9 @@ if which xscreensaver; then
   xscreensaver -no-splash &
 fi
 
+# Should check if it exist
+urxvtd -q -f -o
+
 export PYTHONOPTIMIZE=2
 
 exec wmii
