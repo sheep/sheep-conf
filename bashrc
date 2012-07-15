@@ -101,9 +101,5 @@ fi
 export EDITOR=vim
 
 
-#LD_LIBRARY_PATH
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/install/qt-ext/lib/"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/Trolltech/Qt-4.4.0/lib/"
-
 #PATH
 export PATH="$HOME/bin:$PATH"
