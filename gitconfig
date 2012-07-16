@@ -70,3 +70,8 @@
 	default = current
 [format]
 	signature = Anthony PERARD
+[tig]
+	line-graphics = true
+	show-rev-graph = true
+[tig "bind"]
+	main = O !git checkout %(commit)
