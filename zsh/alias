@@ -80,3 +80,9 @@ alias -g La='2>&1|less -r'
 alias -g G='|egrep'
 alias -g T='|tail'
 alias -g H='|head'
+
+if test "$TERM" = linux; then
+  # Probably need to be root as well
+  alias aoeu='loadkeys dvorak'
+  alias asdf='loadkeys us'
+fi
