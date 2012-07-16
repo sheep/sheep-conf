@@ -86,8 +86,9 @@ fi
 # Alias #
 #########
 
-if [ -f ~/.zsh/alias ]; then
-    compile_source ~/.zsh/alias
+compile_source "$ZSHDIR/alias"
+if [ -f "$ZSHDIR/alias_local" ]; then
+  compile_source "$ZSHDIR/alias_local"
 fi
 
 ############
