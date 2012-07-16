@@ -21,6 +21,8 @@ alias la="ls -A"
 alias lla="ls -lah"
 
 alias -- -="cd -"
+alias -- ...='cd ../..'
+alias -- ....='cd ../../..'
 
 alias cp="cp -i"
 alias mv="mv -i"
