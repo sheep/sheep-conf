@@ -90,6 +90,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 alias du='du -h'
+alias diff='diff -u'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
