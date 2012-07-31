@@ -19,7 +19,9 @@ test -f .Xmodmap && xmodmap .Xmodmap
 xset dpms 300
 xset +dpms
 
-xscreensaver -no-splash &
+if which xscreensaver; then
+  xscreensaver -no-splash &
+fi
 
 export PYTHONOPTIMIZE=2
 
