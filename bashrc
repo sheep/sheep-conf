@@ -90,6 +90,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 alias du='du -h'
+alias df='df -h'
 alias diff='diff -u'
 
 # enable programmable completion features (you don't need to enable
