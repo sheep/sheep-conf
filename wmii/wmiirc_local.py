@@ -68,7 +68,7 @@ keys.bind('main', (
         lambda k: Tag('sel').send(Client('sel'), 'down')),
 ))
 
-if not call('pidof', 'trayer'):
+if not call('pgrep', '--exact', 'trayer'):
     trayer = 'trayer', '--expand', 'true', '--widthtype', 'request', \
         '--height', '5', '--transparent', 'true', '--alpha', '255', \
         '--edge', 'bottom', '--align', 'right'
