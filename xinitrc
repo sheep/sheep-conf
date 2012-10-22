@@ -1,7 +1,13 @@
 #! /bin/sh
 
 export PATH="$HOME/bin:$PATH"
-export PAGER='most -s'
+
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+  for f in /etc/X11/xinit/xinitrc.d/*; do
+    [ -x "$f" ] && . "$f"
+  done
+  unset f
+fi
 
 # Load .Xdefaults
 test -f .Xdefaults && xrdb .Xdefaults
