@@ -8,6 +8,9 @@ github="git@github.com:sheep/sheep-conf"
 
 if test $# -eq 1; then
   commit_to_pick="$1"
+elif test $# -gt 1; then
+  echo "error: Only one commit at a time!" >&2
+  exit 1
 else
   commit_to_pick="origin/local"
 fi
