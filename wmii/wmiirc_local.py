@@ -21,7 +21,7 @@ wmii.colrules = (
     ('.*', '50+50'),
 )
 
-terminal = 'wmiir', 'setsid', 'urxvt'
+terminal = 'wmiir', 'setsid', 'urxvtc'
 browser = 'wmiir', 'setsid', 'firefox'
 chrome = 'wmiir', 'setsid', 'chromium'
 
