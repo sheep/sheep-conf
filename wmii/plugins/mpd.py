@@ -1,5 +1,6 @@
 # Check this:
 # http://jatreuman.indefero.net/p/python-mpd/page/ExampleErrorhandling/
+# mpd client protocol: http://www.musicpd.org/doc/protocol/ch03.html
 
 from threading import Thread
 from select import select
@@ -46,7 +47,9 @@ def update(self):
         if status['state'] == "stop":
             prefix = u"\u25A0"
         elif status['state'] == "play":
-            prefix = u"\u266D"
+            prefix = u"\u25B6"
+        elif status['state'] == "pause":
+            prefix = u"\u25AE\u25AE"
         return wmii.cache['normcolors'], u'%s%s' % (prefix, song)
     except UnicodeDecodeError, e:
         return wmii.cache['normcolors'], u'%s' % prefix
@@ -119,7 +122,7 @@ if __name__ != "__main__":
     monitor = defmonitor(update, name='1_mpd', interval=-1)
 
     keys.bind('main', (
-        "Musique",
+        "Musique (MPD)",
         ('XF86AudioPlay', "Play/Pause",
             lambda k: send_command('play')),
         ('XF86AudioStop', "Stop",
@@ -137,6 +140,9 @@ if __name__ != "__main__":
             lambda k: send_command('next')),
         ('%(mod)s-Prior', "Previous music",
             lambda k: send_command('prev')),
+        # TODO For this next one, should check if urxvtd is used and if ncmpcpp is installed
+        ('%(mod)s-Insert', "Run ncmpcpp",
+            lambda k: call('urxvtc', '-e', 'ncmpcpp', background=True)),
         ))
 
 (cmd_in,cmd_out) = pipe()
