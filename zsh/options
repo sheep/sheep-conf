@@ -3,6 +3,7 @@
 # Options for zsh.
 
 setopt correct                  # spelling correction
+setopt dvorak
 setopt complete_in_word         # not just at the end
 setopt alwaystoend              # when completing within a word, move cursor to the end of the word
 setopt auto_cd                  # change to dirs without cd
