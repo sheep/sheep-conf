@@ -44,11 +44,12 @@ wmii['grabmod'] = keys.defs['mod']
 wmii['border'] = 5
 
 def setbackground(color):
-    call('xsetroot', '-solid', color)
+    call('xsetroot', '-solid', color, background=True)
 setbackground(background)
 
 terminal = 'wmiir', 'setsid', 'urxvtc'
 pygmi.shell = os.environ.get('SHELL', 'sh')
+tray = 'witray', '-t', '/.*/'
 
 @defmonitor
 def time(self):
@@ -59,13 +60,22 @@ wmii.colrules = (
     ('.*', '62+38 # Golden Ratio'),
 )
 
-wmii.tagrules = (
-    ('MPlayer|VLC', '~'),
-)
+#wmii.rules = (
+#    # Apps with system tray icons like to their main windows
+#    # Give them permission.
+#    (ur'^Pidgin:',       dict(allow='+activate')),
+#
+#    # MPlayer and VLC don't float by default, but should.
+#    (ur'MPlayer|VLC',   dict(floating=True)),
+#
+#    # ROX puts all of its windows in the same group, so they open
+#    # with the same tags.  Disable grouping for ROX Filer.
+#    #(ur'^ROX-Filer:',   dict(group=0)),
+#)
 
 def unresponsive_client(client):
     msg = 'The following client is not responding. What would you like to do?'
-    resp = call('wihack', '-transient', client.id,
+    resp = call('wihack', '-transient', str(client.id),
                 'xmessage', '-nearmouse', '-buttons', 'Kill,Wait', '-print',
                 '%s\n  %s' % (msg, client.label))
     if resp == 'Kill':
@@ -94,9 +104,9 @@ events.bind({
 
     'Notice':       lambda args: notice.show(args),
 
-    Match(('LeftBarClick', 'LeftBarDND'), '1'): lambda e, b, tag: tags.select(tag),
-    Match('LeftBarClick', '4'): lambda *a: tags.select(tags.next(True)),
-    Match('LeftBarClick', '5'): lambda *a: tags.select(tags.next()),
+    Match(('LeftBarClick', 'LeftBarDND'), 1): lambda e, b, tag: tags.select(tag),
+    Match('LeftBarClick', 4): lambda *a: tags.select(tags.next(True)),
+    Match('LeftBarClick', 5): lambda *a: tags.select(tags.next()),
 
     Match('LeftBarMouseDown', 3):   lambda e, n, tag: clickmenu((
             ('Delete',     lambda t: Tag(t).delete()),
@@ -300,8 +310,10 @@ if not os.environ.get('WMII_NOPLUGINS', ''):
                    reduce(operator.add, map(os.listdir, dirs), []))
     for f in ['wmiirc_local'] + ['plugins.%s' % file[:-3] for file in files]:
         try:
-            exec 'import %s' % f
+            __import__(f)
         except Exception, e:
             traceback.print_exc(sys.stdout)
+
+call(*tray, background=True)
 
 # vim:se sts=4 sw=4 et:

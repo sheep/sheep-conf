@@ -5,14 +5,12 @@ import pygmi
 from pygmi import *
 from wmiirc import tags
 
-wmii.tagrules = (
-    ('Firefox|Shiretoko|Namoroka', 'web'),
-    ('Google Chrome|Chromium', 'web'),
-    ('Opera', 'web'),
-    ('Pidgin|XChat', 'chat'),
-    ('Icedove', 'mail'),
-
-    ('trayer', '/.*/'),
+wmii.rules = (
+    (ur'(Firefox|Shiretoko|Namoroka)', dict(tags='web')),
+    (ur'(Google Chrome|Chromium)', dict(tags='web')),
+    (ur'Opera', dict(tags='web')),
+    (ur'(Pidgin|XChat)', dict(tags='chat')),
+    (ur'Icedove', dict(tags='mail')),
 )
 
 wmii.colrules = (
@@ -70,12 +68,6 @@ keys.bind('main', (
     ('%(mod)s-Shift-Down',  "Move selected client down",
         lambda k: Tag('sel').send(Client('sel'), 'down')),
 ))
-
-if not call('pgrep', '--exact', 'trayer'):
-    trayer = 'trayer', '--expand', 'true', '--widthtype', 'request', \
-        '--height', '5', '--transparent', 'true', '--alpha', '255', \
-        '--edge', 'bottom', '--align', 'right'
-    call(*trayer, background=True, preexec_fn=time.sleep(1))
 
 print "Configuration loaded"
 
