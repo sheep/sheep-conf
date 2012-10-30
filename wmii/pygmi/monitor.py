@@ -1,4 +1,4 @@
-from threading import Timer
+from threading import Lock, Timer
 
 from pygmi import client
 from pygmi.fs import *
@@ -51,6 +51,8 @@ class Monitor(object):
     side = 'right'
     interval = 1.0
 
+    define = classmethod(defmonitor)
+
     def __init__(self, name=None, interval=None, side=None,
                  action=None, colors=None, label=None):
         """
@@ -69,6 +71,7 @@ class Monitor(object):
         if action:
             self.action = action
 
+        self.lock = Lock()
         self.timer = None
         self.button = Button(self.side, self.name, colors, label)
         self.tick()
@@ -78,22 +81,24 @@ class Monitor(object):
         Called internally at the interval defined by #interval.
         Calls #action and updates the monitor based on the result.
         """
-        mon = monitors.get(self.name, None)
-        if self.timer and mon is not self:
+        if self.timer and monitors.get(self.name, None) is not self:
             return
         if self.active:
             label = self.getlabel()
             if isinstance(label, basestring):
                 label = None, label
-            if label is None:
-                self.button.remove()
-            else:
-                self.button.create(*label)
+            with self.lock:
+                if self.active:
+                    if label is None:
+                        self.button.remove()
+                    else:
+                        self.button.create(*label)
 
-            if self.interval > 0:
-                self.timer = Timer(self.interval, self.tick)
-                self.timer.daemon = True
-                self.timer.start()
+                    if self.interval > 0:
+                        self.timer = Timer(self.interval, self.tick)
+                        self.timer.name = 'Monitor-Timer-%s' % self.name
+                        self.timer.daemon = True
+                        self.timer.start()
 
     def refresh(self):
         if self.timer:
@@ -112,14 +117,17 @@ class Monitor(object):
             return None
 
     _active = True
-    def _set_active(self, val):
-        self._active = bool(val)
-        self.tick()
-        if not val:
-            self.button.remove()
+    @property
+    def active(self):
+        return self._active
 
-    active = property(
-        lambda self: self._active,
-        _set_active)
+    @active.setter
+    def active(self, val):
+        with self.lock:
+            self._active = bool(val)
+        if val:
+            self.tick()
+        else:
+            self.button.remove()
 
 # vim:se sts=4 sw=4 et:

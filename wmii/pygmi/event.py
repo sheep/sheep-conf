@@ -40,7 +40,7 @@ class Match(object):
             elif isinstance(a, basestring):
                 a = a.__eq__
             elif isinstance(a, (list, tuple, set)):
-                a = curry(lambda ary, k: k in ary, a)
+                a = (lambda ary: (lambda k: k in ary))(a)
             elif hasattr(a, 'search'):
                 a = a.search
             else:
@@ -67,10 +67,11 @@ def flatten(items):
         (1, 'foo'), (2: 'foo'), (3: 'foo'), (4: 'bar')
     """
     for k, v in items:
-        if not isinstance(k, (list, tuple)):
-            k = k,
-        for key in k:
-            yield key, v
+        if isinstance(k, (list, tuple)):
+            for key in k:
+                yield key, v
+        else:
+            yield k, v
 
 class Events():
     """
@@ -104,7 +105,10 @@ class Events():
                 if ary is not None:
                     action(*ary)
         except Exception, e:
-            traceback.print_exc(sys.stderr)
+            try:
+                traceback.print_exc(sys.stderr)
+            except:
+                pass
 
     def loop(self):
         """
@@ -163,7 +167,7 @@ class Keys(object):
         """
         self.modes = {}
         self.modelist = []
-        self._set_mode('main', False)
+        self.mode = 'main'
         self.defs = {}
         events.bind(Key=self.dispatch)
 
@@ -178,17 +182,18 @@ class Keys(object):
             }
             self.modelist.append(mode)
 
-    def _set_mode(self, mode, execute=True):
+    mode = property(lambda self: self._mode,
+                   doc="The current mode for which to dispatch keys")
+    @mode.setter
+    def mode(self, mode):
         self._add_mode(mode)
         self._mode = mode
         self._keys = dict((k % self.defs, v) for k, v in
                           self.modes[mode]['keys'].items() +
                           self.modes[mode]['import'].items());
-        if execute:
+        if hasattr(self, 'defs'):
             client.write('/keys', '\n'.join(self._keys.keys()) + '\n')
 
-    mode = property(lambda self: self._mode, _set_mode,
-                   doc="The current mode for which to dispatch keys")
 
     @prop(doc="Returns a short help text describing the bound keys in all modes")
     def help(self):
@@ -276,12 +281,11 @@ class Actions(object):
             raise AttributeError()
         if hasattr(self, name + '_'):
             return getattr(self, name + '_')
-        def action(args=''):
-            cmd = pygmi.find_script(name)
-            if cmd:
-                call(pygmi.shell, '-c', '$* %s' % args, '--', cmd,
-                     background=True)
-        return action
+        cmd = pygmi.find_script(name)
+        if not cmd:
+            raise AttributeError()
+        return lambda args='': call(pygmi.shell, '-c', '$* %s' % args, '--', cmd,
+                                    background=True)
 
     def _call(self, args):
         """
