@@ -99,58 +99,58 @@ if has("cscope")
 
 
     " Using 'CTRL-spacebar' (intepreted as CTRL-@ by vim) then a search type
-    " makes the vim window split horizontally, with search result displayed in
-    " the new window.
+    " makes the vim window split vertically (vim 6 and up only), with search
+    " result displayed in the new window.
     "
     " (Note: earlier versions of vim may not have the :scs command, but it
     " can be simulated roughly via:
     "    nmap <C-@>s <C-W><C-S> :cs find s <C-R>=expand("<cword>")<CR><CR>	
-
-    if has("gui_running")
-        nmap <C-Space>s :scs find s <C-R>=expand("<cword>")<CR><CR>	
-        nmap <C-Space>g :scs find g <C-R>=expand("<cword>")<CR><CR>	
-        nmap <C-Space>c :scs find c <C-R>=expand("<cword>")<CR><CR>	
-        nmap <C-Space>t :scs find t <C-R>=expand("<cword>")<CR><CR>	
-        nmap <C-Space>e :scs find e <C-R>=expand("<cword>")<CR><CR>	
-        nmap <C-Space>f :scs find f <C-R>=expand("<cfile>")<CR><CR>	
-        nmap <C-Space>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
-        nmap <C-Space>d :scs find d <C-R>=expand("<cword>")<CR><CR>	
-    else
-        nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>	
-        nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>	
-        nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>	
-        nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>	
-        nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>	
-        nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>	
-        nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
-        nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>	
-    endif
-
-
-    " Hitting CTRL-space *twice* before the search type does a vertical 
-    " split instead of a horizontal one (vim 6 and up only)
     "
     " (Note: you may wish to put a 'set splitright' in your .vimrc
     " if you prefer the new window on the right instead of the left
 
     if has("gui_running")
-        nmap <C-Space><C-Space>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
-        nmap <C-Space><C-Space>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
-        nmap <C-Space><C-Space>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
-        nmap <C-Space><C-Space>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
-        nmap <C-Space><C-Space>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-        nmap <C-Space><C-Space>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>	
-        nmap <C-Space><C-Space>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
-        nmap <C-Space><C-Space>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-Space>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-Space>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-Space>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-Space>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-Space>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-Space>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
+        nmap <C-Space>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+        nmap <C-Space>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
     else
-        nmap <C-@><C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
-        nmap <C-@><C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
-        nmap <C-@><C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
-        nmap <C-@><C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
-        nmap <C-@><C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-        nmap <C-@><C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>	
-        nmap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
-        nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
+        nmap <C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+        nmap <C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+    endif
+
+
+    " Hitting CTRL-space *twice* before the search type does a horizontal
+    " split instead of a vertical one
+
+    if has("gui_running")
+        nmap <C-Space><C-Space>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-Space><C-Space>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-Space><C-Space>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-Space><C-Space>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-Space><C-Space>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-Space><C-Space>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+        nmap <C-Space><C-Space>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+        nmap <C-Space><C-Space>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+    else
+        nmap <C-@><C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-@><C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-@><C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-@><C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-@><C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+        nmap <C-@><C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+        nmap <C-@><C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+        nmap <C-@><C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>
     endif
 
 
