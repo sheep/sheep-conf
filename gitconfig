@@ -73,5 +73,6 @@
 [tig]
 	line-graphics = true
 	show-rev-graph = true
+	ignore-case = true
 [tig "bind"]
 	main = O !git checkout %(commit)
