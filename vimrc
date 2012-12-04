@@ -25,6 +25,7 @@ endif
 "set background=dark
 set ttyfast
 set splitright          " to have the new window on the right instead of the left, when vertical split
+set diffopt+=vertical
 
 " Colors Scheme
 
