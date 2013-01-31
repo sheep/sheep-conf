@@ -19,26 +19,26 @@ def load_layout(layout, name=None, xmodmap=None):
 
 def us_keyboard():
     # Change binding to default
+    load_layout(('us', ''), 'us', '~/.Xmodmap')
     keys.defs['web_tag'] = 'equal'
     setattr(keys, 'mode', 'main')
-    load_layout(('us', ''), 'us', '~/.Xmodmap')
 
 def dvorak_programmer_keyboard():
     # Change binding to avoid key conflict (between = and 9)
-    keys.defs['web_tag'] = 'numbersign' # '#'
-    setattr(keys, 'mode', 'main')
     load_layout(('-layout', 'us', '-variant', 'dvp',
             '-option', 'compose:102', '-option', 'numpad:shift3',
             '-option', 'kpdl:semi', '-option', 'keypad:atm',
             '-option', 'caps:shift'),
         'dvp',
         None)
+    keys.defs['web_tag'] = 'numbersign' # '#'
+    setattr(keys, 'mode', 'main')
 
 def dvorak_keyboard():
     # Change binding to default
+    load_layout(('dvorak', ''), 'dv', None)
     keys.defs['web_tag'] = 'equal'
     setattr(keys, 'mode', 'main')
-    load_layout(('dvorak', ''), 'dv', None)
 
 def update(self):
     color = wmii.cache['normcolors']
